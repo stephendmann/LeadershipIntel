@@ -83,7 +83,7 @@ const Toc = ({ toc }) => {
                     display: 'inline-block',
                     marginLeft: tocItem.indentLevel * 16
                   }}
-                  className={`truncate ${activeSection === id ? ' font-bold text-red-400 underline' : ''}`}>
+                  className={`truncate ${activeSection === id ? ' font-semibold text-gray-900 dark:text-gray-100' : ''}`}>
                   {tocItem.text}
                 </span>
               </a>
