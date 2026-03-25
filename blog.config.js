@@ -21,7 +21,7 @@ const BLOG = {
     DESCRIPTION: process.env.NEXT_PUBLIC_DESCRIPTION || '',
     AVATAR: process.env.NEXT_PUBLIC_AVATAR || 'https://pub-a5fcf3735dd541139bfe474777b8784d.r2.dev/IMG_0484.JPG',
     KEYWORDS: process.env.NEXT_PUBLIC_KEYWORD || 'Leadership, Management, Notion, Blog',
-    BLOG_FAVICON: process.env.NEXT_PUBLIC_FAVICON || 'https://pub-a5fcf3735dd541139bfe474777b8784d.r2.dev/IMG_0484.JPG',
+    BLOG_FAVICON: process.env.NEXT_PUBLIC_FAVICON || 'https://pub-a5fcf3735dd541139bfe474777b8784d.r2.dev/favicon_stephen.png',
     BEI_AN: process.env.NEXT_PUBLIC_BEI_AN || '',
     BEI_AN_LINK: process.env.NEXT_PUBLIC_BEI_AN_LINK || 'https://beian.miit.gov.cn/',
     BEI_AN_GONGAN: process.env.NEXT_PUBLIC_BEI_AN_GONGAN || '',
