@@ -1,79 +1,178 @@
-# 帮助教程
+# LeadershipIntel
 
-访问帮助：[NotionNext帮助手册](https://docs.tangly1024.com/)
+A personal knowledge and publishing platform built on [NotionNext](https://github.com/tangly1024/NotionNext) — an open-source framework that renders a Notion database as a public blog, deployed via Vercel.
 
-> 本项目教程为免费、公开资源，仅限个人学习使用，禁止利用本教程建立的博客发布非法内容、进行违法犯罪活动。严禁任何个人或组织将本教程用于商业用途，包括但不限于直接售卖、间接收费、或其他变相盈利行为。转载、复制或介绍本教程内容时，须保留作者信息并明确注明来源。 
-> 本项目仅提供由作者团队授权的付费咨询服务，请注意辨别，谨防诈骗行为。任何未经授权的收费服务均可能存在法律风险。
+**Live site:** [stephendmann.com](https://stephendmann.com)
+**Author:** Stephen Mann — management consultant and leadership adviser based in Tauranga, New Zealand
 
-Notion是一个能让效率暴涨的生产力引擎，可以帮你书写文档、管理笔记，搭建知识库，甚至可以为你规划项目、时间管理、组织团队、提高生产力、还有当前最强大的AI技术加持。
+---
 
-> 若希望进一步探索Notion的功能，欢迎购买《[Notion笔记从入门到精通进阶课程](https://docs.tangly1024.com/article/notion-tutorial)》
+## How It Works
 
-> 若希望获得稳定、高速、不限设备数量的VPN科学上网服务，欢迎使用[飞鸟VPN](https://fbinv02.fbaff.cc/auth/register?code=kaA7t4kh)，这是我目前在用的VPN，仅作友情推广
+```
+Notion database (LeadershipIntelligence)
+  → NotionNext (this GitHub fork)
+    → Vercel (auto-deploy on commit)
+      → stephendmann.com
+```
 
-# NotionNext
+Content is written and managed entirely in Notion. Vercel re-fetches content every ~60 seconds, so publishing a new post requires no code deployment — just set **Status = Published** in the Notion database.
 
-<p>
-  <a aria-label="GitHub commit activity" href="https://github.com/tangly1024/NotionNext/commits/main" title="GitHub commit activity">
-    <img src="https://img.shields.io/github/commit-activity/m/tangly1024/NotionNext?style=for-the-badge"/>
-  </a>
-  <a aria-label="GitHub contributors" href="https://github.com/tangly1024/NotionNext/graphs/contributors" title="GitHub contributors">
-    <img src="https://img.shields.io/github/contributors/tangly1024/NotionNext?color=orange&style=for-the-badge"/>
-  </a>
-  <a aria-label="Build status" href="#" title="Build status">
-    <img src="https://img.shields.io/github/deployments/tangly1024/NotionNext/Production?logo=Vercel&style=for-the-badge"/>
-  </a>
-  <a aria-label="Powered by Vercel" href="https://vercel.com?utm_source=Craigary&utm_campaign=oss" title="Powered by Vercel">
-    <img src="https://www.datocms-assets.com/31049/1618983297-powered-by-vercel.svg" height="28"/>
-  </a>
-</p>
+---
 
-中文文档 | [README in English](./README_EN.md)
+## Tech Stack
 
-<hr/>
+| Layer | Technology |
+|---|---|
+| Framework | [Next.js](https://nextjs.org) |
+| Rendering | [React-notion-x](https://github.com/NotionX/react-notion-x) |
+| Styling | [Tailwind CSS](https://tailwindcss.com) |
+| Theme | `next` (customised) |
+| Hosting | [Vercel](https://vercel.com) (free tier) |
+| Content source | Notion database via Notion API |
+| Images | Cloudflare R2 (public CDN) |
 
-一个使用 NextJS + Notion API 实现的，部署在 Vercel 上的静态博客系统。为Notion和所有创作者设计。
+---
 
-支持多种部署方案
+## Repository Structure
 
-## 预览效果
+```
+blog.config.js          # Master site configuration
+conf/                   # Modular config (analytics, comments, ads, fonts, etc.)
+themes/next/            # Active theme — customised Next theme
+  config.js             # Theme-specific settings
+  components/           # Theme components (ArticleCopyright, Toc, etc.)
+components/             # Shared components (Tabs, ShareBar, etc.)
+lib/lang/en-US.js       # English UI strings
+pages/                  # Next.js page routes
+public/                 # Static assets
+```
 
-在线演示：[https://preview.tangly1024.com/](https://preview.tangly1024.com/) ，点击左下角挂件可以切换主题，没找到喜欢的主题？[贡献](/CONTRIBUTING.md)一个吧~
+---
 
-| Next                                                                                                  | Medium                                                                                                      | Hexo                                                                                                  | Fukasawa                                                                                                          |
-| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| <img src='./docs/theme-next.png' width='300'/> [预览NEXT](https://preview.tangly1024.com/?theme=next) | <img src='./docs/theme-medium.png' width='300'/> [预览MEDIUM](https://preview.tangly1024.com/?theme=medium) | <img src='./docs/theme-hexo.png' width='300'/> [预览HEXO](https://preview.tangly1024.com/?theme=hexo) | <img src='./docs/theme-fukasawa.png' width='300'/> [预览FUKASAWA](https://preview.tangly1024.com/?theme=fukasawa) |
+## Key Configuration
 
-## 致谢
+### `blog.config.js`
+Master config file. Critical fields:
 
-感谢Craig Hart发起的Nobelium项目
+```js
+NOTION_PAGE_ID: '07db71a7201283c2b125815a6bc5cb1b',  // Notion database ID
+THEME: 'next',
+LANG: 'en-US',
+AUTHOR: 'Stephen Mann',
+LINK: 'https://stephendmann.com',
+NEXT_REVALIDATE_SECOND: 60,   // Content cache refresh interval (seconds)
+```
 
-<table><tr align="left">
-  <td align="center"><a href="https://github.com/craigary" title="Craig Hart"><img src="https://avatars.githubusercontent.com/u/10571717" width="64px;"alt="Craig Hart"/></a><br/><a href="https://github.com/craigary" title="Craig Hart">Craig Hart</a></td>
-</tr></table>
+### `/themes/next/config.js`
+Theme-specific settings: nav type, sidebar widgets, TOC, article footer options.
 
-## 贡献者
+### `/conf/` folder
+Split config by concern:
 
-致敬每一位开发者！
+| File | Controls |
+|---|---|
+| `analytics.config.js` | Google Analytics ID |
+| `comment.config.js` | Comment system (Giscus, Cusdis, Disqus) |
+| `contact.config.js` | Social links (LinkedIn, Twitter, email) |
+| `ad.config.js` | AdSense |
+| `plugin.config.js` | Algolia search and other plugins |
 
-[![Contributors](https://contrib.rocks/image?repo=tangly1024/NotionNext)](https://github.com/tangly1024/NotionNext/graphs/contributors)
+### Notion Config Table (in-database overrides)
+A special row with **Type = CONFIG** in the Notion database overrides both `blog.config.js` and Vercel environment variables. This is the highest-priority config layer. Requires NotionNext v4.1.0+.
 
-## 引用技术
+---
 
-- **框架**: [Next.js](https://nextjs.org)
-- **样式**: [Tailwind CSS](https://www.tailwindcss.cn/)
-- **渲染**: [React-notion-x](https://github.com/NotionX/react-notion-x)
-- **评论**: [Twikoo](https://github.com/imaegoo/twikoo), [Giscus](https://giscus.app/zh-CN), [Gitalk](https://gitalk.github.io), [Cusdis](https://cusdis.com), [Utterances](https://utteranc.es)
-- **图标**: [Fontawesome](https://fontawesome.com/v6/icons/)
+## Publishing Workflow
 
-## 🔗 友情链接
+1. Write a new page in the **LeadershipIntelligence** Notion database
+2. Set **Status = Draft** while writing
+3. Fill in: **Type** (`Post`), **Category**, **Tags**, **Summary**, **Slug**, **Cover**
+4. Set **Status = Published** → live within ~60 seconds
+5. To unpublish: change Status to `Revoke` or `Invisible`
 
-- [Elog](https://github.com/LetTTGACO/elog) Markdown 批量导出工具、开放式跨平台博客解决方案，随意组合写作平台(语雀/Notion/FlowUs/飞书)和博客平台(Hexo/Vitepress/Halo/Confluence/WordPress等)
+### Content Types
+
+| Type | Purpose | In blog feed? |
+|---|---|---|
+| `Post` | Dated article (default for all content) | ✅ Yes |
+| `Page` | Evergreen standalone page (About, Services) | ❌ No |
+| `Menu` | Top-nav link | ❌ No |
+| `Notice` | Site-wide announcement banner | ❌ No |
+| `CONFIG` | System config overrides — do not create manually | ❌ No |
+
+### Status Values
+
+| Status | Visible publicly? |
+|---|---|
+| `Published` | ✅ Yes |
+| `Draft` | ❌ No |
+| `Invisible` | ❌ No |
+| `Revoke` | ❌ No (previously published, now hidden) |
+
+---
+
+## Content Categories
+
+| # | Category | Visibility |
+|---|---|---|
+| 1 | 🤖 AI Research & Intelligence | Public |
+| 2 | 🏢 Leadership & Management | Public |
+| 3 | 💻 App & Digital Solutions | Public |
+| 4 | 🎓 Education & Teaching | Public |
+| 5 | _📖 Bible Study & Prophecy | Private only |
+| 6 | ✍️ Writing & Content | Public |
+| 7 | 🏥 Health & Community Sector | Public |
+| 8 | 📚 Research & Reading | Mostly private |
+| 9 | 🌏 NZ Context & Current Affairs | Public |
+| 10 | _🗓️ Personal & Admin | Private only |
+
+> Categories prefixed with `_` are private by convention — keep all rows in these categories set to `Invisible`.
+
+---
+
+## Domain & Vercel Setup
+
+- Vercel project → Settings → Domains → custom domain added
+- DNS: CNAME record pointing to `cname.vercel-dns.com` (via Hostinger)
+- `NOTION_PAGE_ID` set as a Vercel Environment Variable
+
+---
+
+## Keeping the Fork Updated
+
+The repo includes an `Upstream Sync` GitHub Action that auto-syncs with the upstream [tangly1024/NotionNext](https://github.com/tangly1024/NotionNext) repo.
+
+> **Caution:** Before any upstream sync, back up: `blog.config.js`, `themes/next/config.js`, `conf/ad.config.js`, and `pages/_document.js` — these contain site-specific customisations that a sync may overwrite.
+
+To disable auto-sync: GitHub → Actions → `Upstream Sync` → Disable workflow.
+
+---
+
+## Local Development
+
+```bash
+# Install dependencies
+yarn install
+
+# Run dev server
+yarn dev
+# → http://localhost:3000
+```
+
+Requires a `.env.local` file with:
+```
+NOTION_PAGE_ID=07db71a7201283c2b125815a6bc5cb1b
+```
+
+---
+
+## Built On
+
+This project is a fork of [NotionNext](https://github.com/tangly1024/NotionNext) by [tangly1024](https://github.com/tangly1024), which was itself inspired by the [Nobelium](https://github.com/craigary/nobelium) project by Craig Hart. NotionNext is released under the MIT License.
+
+---
 
 ## License
 
-The MIT License.
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=tangly1024/NotionNext&type=Date)](https://star-history.com/#tangly1024/NotionNext&Date)
+MIT
