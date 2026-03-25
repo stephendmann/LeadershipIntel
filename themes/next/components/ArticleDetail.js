@@ -84,9 +84,9 @@ export default function ArticleDetail(props) {
                       {post.lastEditedDay}{' '}
                     </span>
 
-                    <div className='hidden busuanzi_container_page_pv font-light mr-2'>
-                      <i className='mr-1 fas fa-eye' />
-                      <span className='mr-2 busuanzi_value_page_pv' />
+                    <div className='hidden busuanzi_container_page_uv font-light mr-2'>
+                      <i className='mr-1 fas fa-user' />
+                      <span className='mr-2 busuanzi_value_page_uv' />
                     </div>
                   </>
                 )}
