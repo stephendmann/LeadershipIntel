@@ -2,7 +2,6 @@ import Comment from '@/components/Comment'
 import LazyImage from '@/components/LazyImage'
 import NotionIcon from '@/components/NotionIcon'
 import NotionPage from '@/components/NotionPage'
-import ShareBar from '@/components/ShareBar'
 import WWAds from '@/components/WWAds'
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
@@ -106,9 +105,6 @@ export default function ArticleDetail(props) {
 
         {showArticleInfo && (
           <>
-            {/* 分享 */}
-            <ShareBar post={post} />
-
             {/* 版权声明 */}
             {post?.type === 'Post' && (
               <ArticleCopyright author={siteConfig('AUTHOR')} url={url} />
