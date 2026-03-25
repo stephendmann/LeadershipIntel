@@ -19,6 +19,7 @@ const BLOG = {
     BIO: process.env.NEXT_PUBLIC_BIO || 'Leadership insights and resources',
     LINK: process.env.NEXT_PUBLIC_LINK || 'https://leadershipintel.vercel.app',
     DESCRIPTION: process.env.NEXT_PUBLIC_DESCRIPTION || '',
+    AVATAR: process.env.NEXT_PUBLIC_AVATAR || 'https://pub-a5fcf3735dd541139bfe474777b8784d.r2.dev/IMG_0484.JPG',
     KEYWORDS: process.env.NEXT_PUBLIC_KEYWORD || 'Leadership, Management, Notion, Blog',
     BLOG_FAVICON: process.env.NEXT_PUBLIC_FAVICON || '/favicon.ico',
     BEI_AN: process.env.NEXT_PUBLIC_BEI_AN || '',
