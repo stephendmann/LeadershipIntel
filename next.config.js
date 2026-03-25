@@ -132,7 +132,8 @@ const nextConfig = {
       'ko-fi.com',
       'drive.google.com',
       'drive.usercontent.google.com',
-      '545aae30febfdf825f737c8235fd9369.r2.cloudflarestorage.com'
+      '545aae30febfdf825f737c8235fd9369.r2.cloudflarestorage.com',
+      'pub-a5fcf3735dd541139bfe474777b8784d.r2.dev'
     ],
     // 图片加载器优化
     loader: 'default',
