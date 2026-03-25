@@ -18,6 +18,7 @@ const BLOG = {
     AUTHOR: process.env.NEXT_PUBLIC_AUTHOR || 'LeadershipIntel',
     BIO: process.env.NEXT_PUBLIC_BIO || 'Leadership insights and resources',
     LINK: process.env.NEXT_PUBLIC_LINK || 'https://leadershipintel.vercel.app',
+    DESCRIPTION: process.env.NEXT_PUBLIC_DESCRIPTION || '',
     KEYWORDS: process.env.NEXT_PUBLIC_KEYWORD || 'Leadership, Management, Notion, Blog',
     BLOG_FAVICON: process.env.NEXT_PUBLIC_FAVICON || '/favicon.ico',
     BEI_AN: process.env.NEXT_PUBLIC_BEI_AN || '',
