@@ -131,7 +131,8 @@ const nextConfig = {
       'webmention.io',
       'ko-fi.com',
       'drive.google.com',
-      'drive.usercontent.google.com'
+      'drive.usercontent.google.com',
+      '545aae30febfdf825f737c8235fd9369.r2.cloudflarestorage.com'
     ],
     // 图片加载器优化
     loader: 'default',
