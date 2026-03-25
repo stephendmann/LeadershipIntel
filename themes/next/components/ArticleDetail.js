@@ -57,7 +57,7 @@ export default function ArticleDetail(props) {
               )}
 
             {/* title */}
-            <div className=' text-center font-bold text-3xl text-black dark:text-white font-serif pt-6'>
+            <div className=' text-center font-bold text-3xl text-black dark:text-white font-sans pt-6'>
               {siteConfig('POST_TITLE_ICON') && (
                 <NotionIcon icon={post.pageIcon} />
               )}
