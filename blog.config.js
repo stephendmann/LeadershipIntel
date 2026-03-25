@@ -6,7 +6,7 @@ const BLOG = {
     NOTION_PAGE_ID:
           process.env.NOTION_PAGE_ID ||
           '07db71a7201283c2b125815a6bc5cb1b',
-    THEME: process.env.NEXT_PUBLIC_THEME || 'simple',
+    THEME: process.env.NEXT_PUBLIC_THEME || 'next',
     LANG: process.env.NEXT_PUBLIC_LANG || 'en-US',
     SINCE: process.env.NEXT_PUBLIC_SINCE || 2025,
 

@@ -33,7 +33,17 @@ const isTenantAdminRoute = createRouteMatcher([
  * @returns
  */
 // eslint-disable-next-line @typescript-eslint/require-await, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
+const BLOCKED_THEMES = ['starter', 'magzine', 'movie', 'landing', 'gitbook', 'example', 'heo', 'proxio', 'nav', 'photo']
+
 const noAuthMiddleware = async (req: NextRequest, ev: any) => {
+  // Block disallowed theme query params
+  const theme = req.nextUrl.searchParams.get('theme')
+  if (theme && BLOCKED_THEMES.includes(theme)) {
+    const url = req.nextUrl.clone()
+    url.searchParams.delete('theme')
+    return NextResponse.redirect(url)
+  }
+
   // 如果没有配置 Clerk 相关环境变量，返回一个默认响应或者继续处理请求
   if (BLOG['UUID_REDIRECT']) {
     let redirectJson: Record<string, string> = {}
