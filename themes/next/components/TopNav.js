@@ -126,7 +126,7 @@ const TopNav = (props) => {
 
             {/* 导航栏 */}
             <div id='sticky-nav' className={`${siteConfig('NEXT_NAV_TYPE', null, CONFIG) !== 'normal' ? 'fixed' : 'relative'} lg:relative w-full top-0 z-20 transform duration-500`}>
-                <div className='w-full flex justify-between items-center p-4 bg-black dark:bg-gray-800 text-white'>
+                <div className='w-full flex justify-between items-center p-4 bg-[#1b263b] dark:bg-gray-900 text-white border-b border-[rgba(0,85,119,0.2)]'>
                     {/* 左侧LOGO 标题 */}
                     <div className='flex flex-none flex-grow-0'>
                         <div onClick={toggleMenuOpen} className='w-8 cursor-pointer'>
@@ -135,7 +135,7 @@ const TopNav = (props) => {
                     </div>
 
                     <div className='flex'>
-                        <Logo {...props} />
+                        <Logo {...props} className='!bg-transparent !border-0 !pb-0 !space-y-0' />
                     </div>
 
                     {/* 右侧功能 */}

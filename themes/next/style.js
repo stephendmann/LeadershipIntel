@@ -7,18 +7,28 @@
 const Style = () => {
   return (
     <style jsx global>{`
-      // 底色
+      /* Brand CSS variables */
+      :root {
+        --brand-teal: #005577;
+        --charcoal: #1b263b;
+        --bg: #f5f6f5;
+        --steel: #778da9;
+        --border: rgba(0, 85, 119, 0.12);
+      }
+
+      /* 底色 */
       body {
-        background-color: #eeedee;
+        background-color: var(--bg);
+        color: var(--charcoal);
       }
       .dark body {
         background-color: black;
       }
 
-      // 菜单下划线动画
+      /* 菜单下划线动画 */
       #theme-next .menu-link {
         text-decoration: none;
-        background-image: linear-gradient(#4e80ee, #4e80ee);
+        background-image: linear-gradient(var(--brand-teal), var(--brand-teal));
         background-repeat: no-repeat;
         background-position: bottom center;
         background-size: 0 2px;
@@ -26,7 +36,7 @@ const Style = () => {
       }
       #theme-next .menu-link:hover {
         background-size: 100% 2px;
-        color: #4e80ee;
+        color: var(--brand-teal);
       }
     `}</style>
   )

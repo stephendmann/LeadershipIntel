@@ -36,7 +36,7 @@ const BlogPostCard = ({ post, index, showSummary }) => {
             {...aosProps}
             href={post?.href}
             passHref
-            className={`cursor-pointer text-3xl ${showPreview ? 'text-center' : ''} leading-tight text-gray-700 dark:text-gray-100 hover:text-blue-500 dark:hover:text-blue-400`}>
+            className={`cursor-pointer text-3xl font-bold ${showPreview ? 'text-center' : ''} leading-tight text-[#1b263b] dark:text-gray-100 hover:text-[#005577] dark:hover:text-blue-400`}>
             {siteConfig('POST_TITLE_ICON') && (
               <NotionIcon icon={post.pageIcon} />
             )}{' '}
@@ -45,7 +45,7 @@ const BlogPostCard = ({ post, index, showSummary }) => {
 
           <div
             {...aosProps}
-            className={`flex mt-2 items-center ${showPreview ? 'justify-center' : 'justify-start'} flex-wrap dark:text-gray-500 text-gray-500 `}>
+            className={`flex mt-2 items-center ${showPreview ? 'justify-center' : 'justify-start'} flex-wrap dark:text-gray-500 text-[#778da9] `}>
             <div>
               {post.category && (
                 <>
@@ -105,9 +105,8 @@ const BlogPostCard = ({ post, index, showSummary }) => {
           <div className='text-right border-t pt-8 border-dashed'>
             <SmartLink
               href={post?.href}
-              className='hover:bg-opacity-100 hover:underline transform duration-300 p-3 text-white bg-gray-800 cursor-pointer'>
+              className='hover:bg-opacity-90 transform duration-300 text-white bg-[#005577] cursor-pointer font-semibold uppercase tracking-[0.04em] rounded-none px-5 py-2.5'>
               {locale.COMMON.ARTICLE_DETAIL}
-              <i className='ml-1 fas fa-angle-right' />
             </SmartLink>
           </div>
         </div>
