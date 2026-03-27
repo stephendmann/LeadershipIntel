@@ -109,9 +109,18 @@ const LayoutBase = props => {
         {/* 顶部黑线装饰 */}
         <div className='h-0.5 w-full bg-gray-700 dark:bg-gray-600 hidden lg:block' />
 
-        {/* Full-width site title - desktop only */}
-        <div className='hidden lg:block w-full bg-white dark:bg-gray-900 px-10 py-8 border-b border-[rgba(0,85,119,0.12)]'>
-          <h1 className='font-sans text-5xl font-bold text-[#005577] dark:text-white leading-tight tracking-tight'>
+        {/* Full-width hero - desktop only */}
+        <div
+          className='hidden lg:flex w-full relative items-center justify-center border-b border-[rgba(0,85,119,0.12)]'
+          style={{
+            minHeight: '220px',
+            backgroundImage: `url(${siteConfig('HOME_BANNER_IMAGE') || '/bg_image.jpg'})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}>
+          {/* Dark overlay so title stays legible over any image */}
+          <div className='absolute inset-0 bg-[#1b263b]/60 dark:bg-black/70' />
+          <h1 className='relative z-10 font-sans text-5xl font-bold text-white leading-tight tracking-tight text-center px-8 drop-shadow-lg'>
             {siteConfig('TITLE')}
           </h1>
         </div>

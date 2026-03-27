@@ -114,20 +114,9 @@ A special row with **Type = CONFIG** in the Notion database overrides both `blog
 
 ## Content Categories
 
-| # | Category | Visibility |
-|---|---|---|
-| 1 | 🤖 AI Research & Intelligence | Public |
-| 2 | 🏢 Leadership & Management | Public |
-| 3 | 💻 App & Digital Solutions | Public |
-| 4 | 🎓 Education & Teaching | Public |
-| 5 | _📖 Bible Study & Prophecy | Private only |
-| 6 | ✍️ Writing & Content | Public |
-| 7 | 🏥 Health & Community Sector | Public |
-| 8 | 📚 Research & Reading | Mostly private |
-| 9 | 🌏 NZ Context & Current Affairs | Public |
-| 10 | _🗓️ Personal & Admin | Private only |
+Categories are defined as properties in your Notion database. Add whatever categories suit your site's subject matter.
 
-> Categories prefixed with `_` are private by convention — keep all rows in these categories set to `Invisible`.
+> **Tip:** Prefix private categories with `_` by convention and keep all rows in those categories set to `Invisible` — this keeps them out of the public feed while remaining easy to identify in Notion.
 
 ---
 

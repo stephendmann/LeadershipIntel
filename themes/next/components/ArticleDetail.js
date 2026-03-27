@@ -40,6 +40,14 @@ export default function ArticleDetail(props) {
         itemType='https://schema.org/Movie'
         className='overflow-y-hidden py-10 px-4 lg:pt-24 md:px-24 dark:border-gray-700 bg-white dark:bg-hexo-black-gray'>
 
+          {/* Home link */}
+        <div className='mb-6'>
+          <a href='/' className='inline-flex items-center text-sm text-[#778da9] hover:text-[#005577] dark:text-gray-400 dark:hover:text-white transition-colors duration-200'>
+            <i className='fas fa-arrow-left mr-2' />
+            Home
+          </a>
+        </div>
+
         {showArticleInfo && (
           <header {...aosProps}>
             {/* Cover image */}
