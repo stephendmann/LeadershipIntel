@@ -44,6 +44,8 @@ export const useNextGlobal = () => useContext(ThemeGlobalNext)
  */
 const LayoutBase = props => {
   const { children, headerSlot, rightAreaSlot, post } = props
+  const { siteInfo } = useGlobal()
+  const heroBg = siteInfo?.pageCover || '/bg_image.jpg'
   const targetRef = useRef(null)
   const floatButtonGroup = useRef(null)
   const [showRightFloat, switchShow] = useState(false)
@@ -114,7 +116,7 @@ const LayoutBase = props => {
           className='hidden lg:flex w-full relative items-center justify-center border-b border-[rgba(0,85,119,0.12)]'
           style={{
             minHeight: '220px',
-            backgroundImage: `url(${siteConfig('HOME_BANNER_IMAGE') || '/bg_image.jpg'})`,
+            backgroundImage: `url(${heroBg})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}>
