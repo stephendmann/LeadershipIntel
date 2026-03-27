@@ -44,8 +44,7 @@ export const useNextGlobal = () => useContext(ThemeGlobalNext)
  */
 const LayoutBase = props => {
   const { children, headerSlot, rightAreaSlot, post } = props
-  const { siteInfo } = useGlobal()
-  const heroBg = siteInfo?.pageCover || '/bg_image.jpg'
+  const heroBg = '/blog-header.png'
   const targetRef = useRef(null)
   const floatButtonGroup = useRef(null)
   const [showRightFloat, switchShow] = useState(false)
