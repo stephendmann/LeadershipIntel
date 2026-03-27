@@ -109,6 +109,13 @@ const LayoutBase = props => {
         {/* 顶部黑线装饰 */}
         <div className='h-0.5 w-full bg-gray-700 dark:bg-gray-600 hidden lg:block' />
 
+        {/* Full-width site title - desktop only */}
+        <div className='hidden lg:block w-full bg-white dark:bg-gray-900 px-10 py-8 border-b border-[rgba(0,85,119,0.12)]'>
+          <h1 className='font-sans text-5xl font-bold text-[#005577] dark:text-white leading-tight tracking-tight'>
+            {siteConfig('TITLE')}
+          </h1>
+        </div>
+
         {/* 主区 */}
         <main
           id='wrapper'

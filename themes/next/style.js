@@ -92,6 +92,51 @@ const Style = () => {
         background-color: var(--charcoal);
         border-bottom: 1px solid rgba(0, 85, 119, 0.2);
       }
+
+      /* ═══════════════════════════════════════════════════════
+         Typography system
+         H1              → Inter Bold (700)
+         Primary body    → Inter SemiBold (600)
+         Taglines/quotes → Merriweather Italic (400)
+         ═══════════════════════════════════════════════════════ */
+
+      /* ─── H1: Inter Bold ─────────────────────────────────── */
+      #theme-next .notion-h1,
+      #theme-next .notion-title,
+      #theme-next h1 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      /* ─── H2 / H3: Inter SemiBold ───────────────────────── */
+      #theme-next .notion-h2,
+      #theme-next .notion-h3,
+      #theme-next h2,
+      #theme-next h3 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+
+      /* ─── Primary body: Inter SemiBold ──────────────────── */
+      #theme-next #article-wrapper .notion-text,
+      #theme-next #article-wrapper p,
+      #theme-next #article-wrapper li {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        line-height: 1.75;
+      }
+
+      /* ─── Taglines & quotes: Merriweather Italic ─────────── */
+      #theme-next .notion-quote,
+      #theme-next blockquote,
+      #theme-next .notion-callout {
+        font-family: 'Merriweather', Georgia, serif;
+        font-style: italic;
+        font-weight: 400;
+        line-height: 1.8;
+      }
     `}</style>
   )
 }
