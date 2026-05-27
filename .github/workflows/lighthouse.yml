@@ -1,0 +1,22 @@
+name: Lighthouse CI
+
+# Fires automatically when Vercel posts a deployment_status event (preview or production).
+# No Vercel token required — GitHub receives the event from the Vercel GitHub integration.
+on:
+  deployment_status:
+
+jobs:
+  lighthouse:
+    # Only run when the deployment succeeded
+    if: github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Lighthouse against Vercel deployment URL
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: ${{ github.event.deployment_status.target_url }}
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          budgetPath: .github/lighthouse-budget.json

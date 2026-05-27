@@ -1,0 +1,48 @@
+name: Upstream Sync (PR-based)
+
+on:
+  workflow_dispatch:
+  # Uncomment below to run automatically. Review generated PRs before merging.
+  # schedule:
+  #   - cron: "0 9 * * 1"  # Every Monday 9am UTC
+
+jobs:
+  upstream-sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Add upstream remote
+        run: |
+          git remote add upstream https://github.com/tangly1024/NotionNext.git
+          git fetch upstream main
+
+      - name: Create sync branch
+        id: branch
+        run: |
+          BRANCH="sync/upstream-$(date +%Y-%m-%d)"
+          git checkout -b "$BRANCH"
+          git merge upstream/main --no-commit --no-ff || true
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: Push sync branch
+        run: git push origin HEAD
+
+      - name: Open PR
+        run: |
+          gh pr create \
+            --title "Upstream sync $(date +%Y-%m-%d)" \
+            --body "Auto-generated PR from tangly1024/NotionNext main.
+
+**Before merging:**
+- Review \`UPSTREAM-NOTES.md\` for files that must not be overwritten
+- Resolve conflicts in \`blog.config.js\`, \`themes/next/style.js\`, \`themes/next/config.js\`, \`public/\`
+- Check that Vercel preview deployment passes" \
+            --base main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
