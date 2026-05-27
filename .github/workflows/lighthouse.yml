@@ -17,6 +17,9 @@ jobs:
         uses: treosh/lighthouse-ci-action@v11
         with:
           urls: ${{ github.event.deployment_status.target_url }}
+          # Use the CI-specific config, not the project-root lighthouserc.js.
+          # The root config has startServerCommand: 'npm start' which tries to
+          # boot Next.js locally — not needed here since we have a live URL.
+          configPath: .github/lighthouserc.json
           uploadArtifacts: true
           temporaryPublicStorage: true
-          budgetPath: .github/lighthouse-budget.json
