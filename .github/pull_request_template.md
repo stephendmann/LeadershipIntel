@@ -1,36 +1,29 @@
-> 尽量按此模板PR内容，或粘贴相关的ISSUE链接。
+## What does this PR do?
 
-## 已知问题
+<!-- Brief description of the change -->
 
-1. (示例)版本号管理不规范
-   - 版本号直接写在环境变量中，容易出错
-   - 多处维护版本号，可能不一致
+## Type
+- [ ] Upstream sync (tangly1024/NotionNext)
+- [ ] LeadershipIntel feature / branding
+- [ ] Bug fix
+- [ ] Dependency update (Dependabot)
+- [ ] Content / config change
 
-## 解决方案
+---
 
-1. (示例)将版本号管理从 `.env.local` 迁移到 `package.json`
-   - 统一从 `package.json` 读取版本号
-   - 使用 IIFE 优雅处理版本号获取逻辑
-   - 保持向后兼容，支持环境变量覆盖
+## Upstream sync checklist
+_Complete only for `sync/upstream-*` PRs. Skip for all other types._
 
-## 改动收益
+- [ ] Reviewed `UPSTREAM-NOTES.md` — protected files not overwritten
+- [ ] Conflicts resolved in `blog.config.js`, `themes/next/style.js`, `themes/next/config.js`
+- [ ] Brand tokens and author details intact in `blog.config.js`
+- [ ] LeadershipIntel-specific components in `themes/next/components/` preserved
 
-1. (示例)更规范的版本管理
-   - 统一从 `package.json` 读取
-   - 保持与 npm 生态一致
-   - 减少人为错误
+---
 
-## 具体改动
+## Pre-merge checklist
 
-1. （示例）`blog.config.js`
-   - 移除原有的静态版本号配置
-   - 在文件末尾添加动态版本号获取逻辑
-   - 保持向后兼容，优先使用环境变量
-   - 添加错误处理和默认值
-
-## 测试确认
-
-- [x] 本地开发环境测试通过
-- [x] 生产环境构建测试通过
-- [x] 版本号正确显示
-- [x] 环境变量配置正常工作
+- [ ] Vercel preview deployment passes (check the deployment check on this PR)
+- [ ] Lighthouse scores acceptable (check Lighthouse CI results)
+- [ ] No visible layout regressions in the Vercel preview (check mobile + desktop)
+- [ ] If content change: metadata complete (title, description, OG image, tags, canonical URL)

@@ -1,0 +1,16 @@
+[
+  {
+    "path": "/*",
+    "timings": [
+      { "metric": "first-contentful-paint", "budget": 3000 },
+      { "metric": "largest-contentful-paint", "budget": 5000 },
+      { "metric": "total-blocking-time", "budget": 500 }
+    ],
+    "scores": [
+      { "metric": "performance", "minScore": 0.7 },
+      { "metric": "accessibility", "minScore": 0.9 },
+      { "metric": "best-practices", "minScore": 0.85 },
+      { "metric": "seo", "minScore": 0.9 }
+    ]
+  }
+]
