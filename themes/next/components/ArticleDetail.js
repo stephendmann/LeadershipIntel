@@ -113,7 +113,11 @@ export default function ArticleDetail(props) {
           <>
             {/* Copyright */}
             {post?.type === 'Post' && (
-              <ArticleCopyright author={siteConfig('AUTHOR')} url={url} />
+              <ArticleCopyright
+                author={siteConfig('AUTHOR')}
+                url={url}
+                {...props}
+              />
             )}
 
             {/* Recommended posts */}

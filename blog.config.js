@@ -12,6 +12,8 @@ const BLOG = {
 
     PSEUDO_STATIC: process.env.NEXT_PUBLIC_PSEUDO_STATIC || true,
     NEXT_REVALIDATE_SECOND: process.env.NEXT_PUBLIC_REVALIDATE_SECOND || 300,
+    // On-Demand Revalidation Token — POST /api/revalidate to refresh page cache immediately
+    REVALIDATION_TOKEN: process.env.REVALIDATION_TOKEN || '',
     APPEARANCE: process.env.NEXT_PUBLIC_APPEARANCE || 'light',
     APPEARANCE_DARK_TIME: process.env.NEXT_PUBLIC_APPEARANCE_DARK_TIME || [18, 6],
 
@@ -42,7 +44,9 @@ const BLOG = {
     ...require('./conf/widget.config'),
     ...require('./conf/ad.config'),
     ...require('./conf/plugin.config'),
+    ...require('./conf/ai.config'),
     ...require('./conf/performance.config'),
+    ...require('./conf/top-tag.config'),
 
     // Advanced usage
     ...require('./conf/layout-map.config'),
@@ -59,6 +63,8 @@ const BLOG = {
     // Post list settings
     CAN_COPY: process.env.NEXT_PUBLIC_CAN_COPY || true,
 
+    ...require('./conf/techgrow.config'),
+
     // Sidebar layout reverse (left<->right)
     LAYOUT_SIDEBAR_REVERSE:
           process.env.NEXT_PUBLIC_LAYOUT_SIDEBAR_REVERSE || false,
@@ -67,6 +73,12 @@ const BLOG = {
     GREETING_WORDS:
           process.env.NEXT_PUBLIC_GREETING_WORDS ||
           'Welcome to LeadershipIntel, Your source for leadership insights, Resources for leaders and managers, Explore leadership content',
+
+    // Greeting words typing effect speeds
+    GREETING_WORDS_TYPE_SPEED:
+          process.env.NEXT_PUBLIC_GREETING_WORDS_TYPE_SPEED || 200,
+    GREETING_WORDS_BACK_SPEED:
+          process.env.NEXT_PUBLIC_GREETING_WORDS_BACK_SPEED || 100,
 
     // uuid redirect to slug
     UUID_REDIRECT: process.env.UUID_REDIRECT || false

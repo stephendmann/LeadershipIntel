@@ -7,7 +7,7 @@ const InfoCard = (props) => {
   return <>
     <div className='flex flex-col items-center justify-center '>
         <div className='transform duration-200'>
-          <LazyImage src={siteConfig('AVATAR')} className='rounded-full' width={120} alt={siteConfig('AUTHOR')}/>
+          <LazyImage src={siteConfig('AVATAR')} className='rounded-full' width={120} height={120} alt={siteConfig('AUTHOR')}/>
         </div>
         <div className='text-2xl font-sans dark:text-white py-2 hover:scale-105 transform duration-200'>{siteConfig('AUTHOR')}</div>
         <div className='font-light dark:text-white py-2 hover:scale-105 transform duration-200 text-center'>{siteConfig('BIO')}</div>
