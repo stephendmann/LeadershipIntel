@@ -53,3 +53,4 @@ package-lock.json
 
 .notion-api-lock
 .gstack/
+.env*
