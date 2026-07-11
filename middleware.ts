@@ -32,9 +32,9 @@ const isTenantAdminRoute = createRouteMatcher([
  * @param ev
  * @returns
  */
-// eslint-disable-next-line @typescript-eslint/require-await, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
 const BLOCKED_THEMES = ['starter', 'magzine', 'movie', 'landing', 'gitbook', 'example', 'heo', 'proxio', 'nav', 'photo']
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
 const noAuthMiddleware = async (req: NextRequest, ev: any) => {
   // Block disallowed theme query params
   const theme = req.nextUrl.searchParams.get('theme')
@@ -74,8 +74,8 @@ const noAuthMiddleware = async (req: NextRequest, ev: any) => {
  * 鉴权中间件
  */
 const authMiddleware = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
-  ? clerkMiddleware((auth, req) => {
-      const { userId } = auth()
+  ? clerkMiddleware(async (auth, req) => {
+      const { userId } = await auth()
       // 处理 /dashboard 路由的登录保护
       if (isTenantRoute(req)) {
         if (!userId) {
@@ -88,12 +88,9 @@ const authMiddleware = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
 
       // 处理管理员相关权限保护
       if (isTenantAdminRoute(req)) {
-        auth().protect(has => {
-          return (
-            has({ permission: 'org:sys_memberships:manage' }) ||
-            has({ permission: 'org:sys_domains_manage' })
-          )
-        })
+        // Clerk v6 removed org:sys_* permissions from session claims; those
+        // permissions belong to org admins, so check the role instead.
+        await auth.protect(has => has({ role: 'org:admin' }))
       }
 
       // 默认继续处理请求
