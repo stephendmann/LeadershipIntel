@@ -101,6 +101,15 @@ GitHub only shows a check as available once it has run at least once on the bran
 4. Add: **Lint & Type Check**, **Lighthouse CI**, **CodeQL**, **Vercel**
 5. Save
 
+> **⚠️ Do not enable "Lint & Type Check" as a required check yet.** The job
+> currently fails on ~38 pre-existing `@typescript-eslint` errors
+> (`no-explicit-any`, `no-unsafe-assignment`, `no-floating-promises`, etc.)
+> across the codebase — accumulated debt that was hidden until PR #17 fixed
+> the broken install step. Making it required now would block every future
+> merge. Clear the lint debt in a dedicated PR first (run `yarn lint` locally
+> for the full list; prefer real type annotations over suppress comments),
+> then enable the check.
+
 ---
 
 ## Monthly maintenance checklist
