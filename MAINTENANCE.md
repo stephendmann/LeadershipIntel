@@ -54,8 +54,16 @@ See `.env.example` for the full list. Never commit real values — use Vercel's 
 
 ## Upstream sync process
 
-The upstream project is [tangly1024/NotionNext](https://github.com/tangly1024/NotionNext).  
+The upstream project is [notionnext-org/NotionNext](https://github.com/notionnext-org/NotionNext)
+(formerly tangly1024/NotionNext).  
 **Never merge upstream directly into `main`.** Always use a reviewed PR.
+
+**Follow-up from the 2026-07-11 sync (v4.9.3.1 → v4.10.5):** CodeQL flags 16 alerts
+inherited from upstream code — XSS-through-DOM in unused themes (simple, photo, movie,
+medium, magzine), URL-substring sanitization in `lib/db/notion/mapImage.js`, incomplete
+sanitization in `lib/utils/validation.js` and upstream docs scripts, clear-text password
+storage in `lib/utils/password.js`. The `lib/` ones affect active code paths and deserve
+a dedicated hardening PR; consider contributing fixes upstream.
 
 **Step-by-step:**
 

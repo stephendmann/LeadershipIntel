@@ -19,7 +19,7 @@ jobs:
 
       - name: Add upstream remote
         run: |
-          git remote add upstream https://github.com/tangly1024/NotionNext.git
+          git remote add upstream https://github.com/notionnext-org/NotionNext.git
           git fetch upstream main
 
       - name: Create sync branch
