@@ -23,7 +23,7 @@ safe to accept; changes that touch the values listed below must be kept.
 | `middleware.ts` | Clerk v6 middleware (`clerkMiddleware`) | Entire file — keep ours |
 | `pages/api/user.ts` | Returns 401 when Clerk is not configured | Keep ours |
 | `next.config.js` | Explicit `images.domains` whitelist (upstream opened all http/https remotePatterns — do not adopt) | Keep our whitelist |
-| `package.json` | Clerk v6 pin, `next` exact security pin, Node `20.x` engines cap, `@waline/client` exact 3.13.0, `form-data ^4.0.6` resolution | Keep these pins; accept other upstream dep bumps |
+| `package.json` | Clerk v6 pin, `next` exact security pin, `@waline/client` exact 3.13.0, `form-data ^4.0.6` resolution | Keep these pins; accept other upstream dep bumps. Node engines follow upstream (`>=22 <25` since v4.10.x — the old 20.x cap is obsolete; Vercel runs 24.x) |
 | `public/` | `blog-header.png`, favicon assets | Keep our assets; accept new upstream assets |
 | `README.md` | Fully rewritten for LeadershipIntel product docs | Entire file — keep ours |
 | `conf/analytics.config.js` | Analytics IDs (GA etc.) | Any ID values |
