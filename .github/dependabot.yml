@@ -13,20 +13,10 @@ updates:
         dependency-type: "production"
     ignore:
       # Majors are deliberate, tested migrations — not auto-bumps.
-      # See MAINTENANCE.md. Remove an entry here when starting that migration.
-      - dependency-name: "next"
+      # See MAINTENANCE.md. Narrow this when starting a migration.
+      - dependency-name: "*"
         update-types: ["version-update:semver-major"]
-      - dependency-name: "react"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "react-dom"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "tailwindcss"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "eslint"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "typescript"
-        update-types: ["version-update:semver-major"]
-      # 3.14.0+ requires Node >=22; repo is Node 20 (engines, .nvmrc, Dockerfile).
-      # Pinned at 3.13.0 in package.json — lift this when moving to Node 22.
+      # Pinned at 3.13.0 in package.json since the Node 20 era; the Node >=22
+      # blocker is gone (engines >=22 <25) — unpin deliberately when convenient.
       - dependency-name: "@waline/client"
         versions: [">3.13.0"]
