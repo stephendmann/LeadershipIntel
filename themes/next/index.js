@@ -16,6 +16,7 @@ import BlogPostListScroll from './components/BlogPostListScroll'
 import Card from './components/Card'
 import FloatDarkModeButton from './components/FloatDarkModeButton'
 import Footer from './components/Footer'
+import Hero from './components/Hero'
 import JumpToBottomButton from './components/JumpToBottomButton'
 import JumpToTopButton from './components/JumpToTopButton'
 import SideAreaLeft from './components/SideAreaLeft'
@@ -44,7 +45,6 @@ export const useNextGlobal = () => useContext(ThemeGlobalNext)
  */
 const LayoutBase = props => {
   const { children, headerSlot, rightAreaSlot, post } = props
-  const heroBg = '/blog-header.png'
   const targetRef = useRef(null)
   const floatButtonGroup = useRef(null)
   const [showRightFloat, switchShow] = useState(false)
@@ -111,27 +111,7 @@ const LayoutBase = props => {
         <div className='h-0.5 w-full bg-gray-700 dark:bg-gray-600 hidden lg:block' />
 
         {/* Full-width hero - desktop only */}
-        <div
-          className='hidden lg:flex w-full relative items-center justify-center border-b border-[rgba(0,85,119,0.12)]'
-          style={{
-            minHeight: '220px',
-            backgroundImage: `url(${heroBg})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}>
-          {/* Dark overlay so title stays legible over any image */}
-          <div className='absolute inset-0 bg-[#1b263b]/60 dark:bg-black/70' />
-          <div className='relative z-10 flex flex-col items-center px-8'>
-            <h1 className='font-sans text-5xl font-bold text-white leading-tight tracking-tight text-center drop-shadow-lg'>
-              {siteConfig('TITLE')}
-            </h1>
-            {siteConfig('BIO') && (
-              <p className='mt-3 font-sans text-lg text-white/90 text-center max-w-2xl drop-shadow-lg'>
-                {siteConfig('BIO')}
-              </p>
-            )}
-          </div>
-        </div>
+        <Hero {...props} />
 
         {/* 主区 */}
         <main
