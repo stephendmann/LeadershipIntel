@@ -16,7 +16,8 @@ safe to accept; changes that touch the values listed below must be kept.
 | `blog.config.js` | Author, BIO, LINK, AVATAR, KEYWORDS, FAVICON, GREETING_WORDS, NOTION_PAGE_ID | All custom values — accept upstream structural changes only |
 | `themes/next/style.js` | Full brand token set (`--brand-teal: #005577`, charcoal, bg, steel, border) plus all derived CSS rules for nav, tags, articles, sidebar | Entire file — keep ours |
 | `themes/next/config.js` | NEXT_HOME_BANNER_STRINGS replaced with English copy; nav/sidebar/layout settings tuned | BANNER_STRINGS at minimum; review all other values on merge |
-| `themes/next/components/` | LeadershipIntel-specific component overrides | Inspect each changed component during merge |
+| `themes/next/index.js` | Full-width hero banner (desktop) with `blog-header.png` background + BIO tagline under the title | Entire hero `<div>` block — keep ours |
+| `themes/next/components/` | LeadershipIntel-specific component overrides (incl. `Footer.js` site-title tag fixed from stray `<h1>` to `<p>`) | Inspect each changed component during merge |
 | `public/` | `blog-header.png`, favicon assets | Keep our assets; accept new upstream assets |
 | `README.md` | Fully rewritten for LeadershipIntel product docs | Entire file — keep ours |
 | `conf/analytics.config.js` | Analytics IDs (GA etc.) | Any ID values |

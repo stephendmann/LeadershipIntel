@@ -121,9 +121,16 @@ const LayoutBase = props => {
           }}>
           {/* Dark overlay so title stays legible over any image */}
           <div className='absolute inset-0 bg-[#1b263b]/60 dark:bg-black/70' />
-          <h1 className='relative z-10 font-sans text-5xl font-bold text-white leading-tight tracking-tight text-center px-8 drop-shadow-lg'>
-            {siteConfig('TITLE')}
-          </h1>
+          <div className='relative z-10 flex flex-col items-center px-8'>
+            <h1 className='font-sans text-5xl font-bold text-white leading-tight tracking-tight text-center drop-shadow-lg'>
+              {siteConfig('TITLE')}
+            </h1>
+            {siteConfig('BIO') && (
+              <p className='mt-3 font-sans text-lg text-white/90 text-center max-w-2xl drop-shadow-lg'>
+                {siteConfig('BIO')}
+              </p>
+            )}
+          </div>
         </div>
 
         {/* 主区 */}

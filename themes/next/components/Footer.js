@@ -40,7 +40,7 @@ const Footer = ({ title }) => {
           <span className='px-1 busuanzi_value_site_uv'> </span>{' '}
         </span>
         <br />
-        <h1>{title}</h1>
+        <p className='font-bold'>{title}</p>
         <span className='text-xs font-sans text-gray-500 dark:text-gray-300 '>
           Powered by{' '}
           <a
