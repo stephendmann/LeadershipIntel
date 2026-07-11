@@ -8,6 +8,12 @@ import type { NextApiRequest, NextApiResponse } from 'next'
  * @returns
  */
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  // Without Clerk env keys the middleware runs its no-auth fallback and
+  // getAuth() throws, turning "auth not configured" into a 500.
+  if (!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY) {
+    return res.status(401).json({ error: 'Unauthorized' })
+  }
+
   try {
     const { userId } = getAuth(req)
 
