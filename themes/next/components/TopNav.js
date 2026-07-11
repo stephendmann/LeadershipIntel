@@ -135,7 +135,7 @@ const TopNav = (props) => {
                     </div>
 
                     <div className='flex'>
-                        <Logo {...props} className='!bg-transparent !border-0 !pb-0 !space-y-0' />
+                        <Logo {...props} onDark className='!bg-transparent !border-0 !pb-0 !space-y-0' />
                     </div>
 
                     {/* 右侧功能 */}
