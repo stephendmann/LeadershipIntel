@@ -30,6 +30,14 @@ safe to accept; changes that touch the values listed below must be kept.
 
 ---
 
+## Upstream files intentionally removed (do not re-add on sync)
+
+| File | Why removed |
+|------|-------------|
+| `.github/workflows/bump-version-on-main.yml` | Upstream's release automation — auto-bumps package.json and recreates a `chore/bump-package-version` branch on every push to main. The fork's version follows upstream via syncs; this is noise here. If a sync brings it back (modify/delete conflict), keep it deleted. |
+
+---
+
 ## Files not in upstream (never overwrite)
 
 | File | Purpose |
