@@ -243,17 +243,19 @@ const LayoutSlug = props => {
             if (item.querySelector('figcaption').textContent.trim() === value) {
               item.classList.add('active')
               if (iframe) {
-                // 仅允许http/https协议的外链恢复播放，避免data-src被解释为可执行协议
+                // 仅允许http/https协议的外链恢复播放，src使用解析后的规范化URL而非原始文本
                 const dataSrc = iframe.getAttribute('data-src')
-                let isSafeSrc = false
+                let safeSrc = ''
                 try {
-                  const protocol = new URL(dataSrc, window.location.href).protocol
-                  isSafeSrc = protocol === 'http:' || protocol === 'https:'
+                  const parsedUrl = new URL(dataSrc, window.location.href)
+                  if (parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:') {
+                    safeSrc = parsedUrl.href
+                  }
                 } catch {
-                  isSafeSrc = false
+                  safeSrc = ''
                 }
-                if (isSafeSrc) {
-                  iframe.setAttribute('src', dataSrc)
+                if (safeSrc) {
+                  iframe.setAttribute('src', safeSrc)
                 }
               }
             } else {

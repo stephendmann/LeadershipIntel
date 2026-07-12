@@ -19,7 +19,9 @@ const BlogPostCard = ({ post, className }) => {
   // 仅当图标真实托管在 amazonaws.com 域名（而非路径/查询中包含该字符串）时才追加宽度参数
   let isAmazonawsHost = false
   try {
-    isAmazonawsHost = new URL(post.pageIcon).hostname.endsWith('amazonaws.com')
+    const hostname = new URL(post.pageIcon).hostname
+    isAmazonawsHost =
+      hostname === 'amazonaws.com' || hostname.endsWith('.amazonaws.com')
   } catch {
     isAmazonawsHost = false
   }
