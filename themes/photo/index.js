@@ -245,7 +245,18 @@ const LayoutSlug = props => {
             if (item.querySelector('figcaption').textContent.trim() === value) {
               item.classList.add('active')
               if (iframe) {
-                iframe.setAttribute('src', iframe.getAttribute('data-src'))
+                // 仅允许http/https协议的外链恢复播放，避免data-src被解释为可执行协议
+                const dataSrc = iframe.getAttribute('data-src')
+                let isSafeSrc = false
+                try {
+                  const protocol = new URL(dataSrc, window.location.href).protocol
+                  isSafeSrc = protocol === 'http:' || protocol === 'https:'
+                } catch {
+                  isSafeSrc = false
+                }
+                if (isSafeSrc) {
+                  iframe.setAttribute('src', dataSrc)
+                }
               }
             } else {
               item.classList.remove('active')
