@@ -58,12 +58,15 @@ The upstream project is [notionnext-org/NotionNext](https://github.com/notionnex
 (formerly tangly1024/NotionNext).  
 **Never merge upstream directly into `main`.** Always use a reviewed PR.
 
-**Follow-up from the 2026-07-11 sync (v4.9.3.1 → v4.10.5):** CodeQL flags 16 alerts
-inherited from upstream code — XSS-through-DOM in unused themes (simple, photo, movie,
-medium, magzine), URL-substring sanitization in `lib/db/notion/mapImage.js`, incomplete
-sanitization in `lib/utils/validation.js` and upstream docs scripts, clear-text password
-storage in `lib/utils/password.js`. The `lib/` ones affect active code paths and deserve
-a dedicated hardening PR; consider contributing fixes upstream.
+**Follow-up from the 2026-07-11 sync (v4.9.3.1 → v4.10.5):** CodeQL flagged 25 open alerts
+inherited from upstream code. The 6 affecting active `lib/` code paths (URL-substring
+sanitization in `mapImage.js`, incomplete sanitization + bad regex in `validation.js`,
+DOM-text-as-href in `lib/utils/index.js`, clear-text password storage in `password.js`)
+plus the matching alert in `pages/[prefix]/index.js` are fixed in PR #40
+(`fix/codeql-lib-hardening`). Remaining alerts are in unused themes (simple, photo, movie,
+medium, magzine), one-off `scripts/*.mjs` docs tooling, and `themes/claude` — lower
+priority since they're not on the live render path; consider contributing the mapImage.js
+fix upstream since the bug likely exists there too.
 
 **Step-by-step:**
 
