@@ -51,7 +51,6 @@ Founder 可跳过第 3 步中纯文档 PR（若已授权文档维护者）。
 | [labeler.yml](../../.github/workflows/labeler.yml) | 按路径打 `documentation` / `theme` / `core` 等标签 |
 | [dependabot.yml](../../.github/dependabot.yml) | 每周依赖 PR（默认跳过 major） |
 | [stale.yml](../../.github/workflows/stale.yml) | 45 天无活动标 stale，14 天后关闭 Issue |
-| [deploy-docs-site.yml](../../.github/workflows/deploy-docs-site.yml) | `main` 文档自动发布 |
 | CODEOWNERS | 仅高影响路径 @Founder |
 
 ## 6. Org Admin 一次性设置（合规 + 省力）
