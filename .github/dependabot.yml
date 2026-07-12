@@ -16,7 +16,3 @@ updates:
       # See MAINTENANCE.md. Narrow this when starting a migration.
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
-      # Pinned at 3.13.0 in package.json since the Node 20 era; the Node >=22
-      # blocker is gone (engines >=22 <25) — unpin deliberately when convenient.
-      - dependency-name: "@waline/client"
-        versions: [">3.13.0"]
