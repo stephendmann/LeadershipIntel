@@ -16,10 +16,16 @@ const BlogPostCard = ({ post, className }) => {
     post.pageIcon !== ''
       ? post.pageIcon
       : siteConfig('IMG_LAZY_LOAD_PLACEHOLDER')
-  pageIcon =
-    post.pageIcon.indexOf('amazonaws.com') !== -1
-      ? post.pageIcon + '&width=88'
-      : post.pageIcon
+  // 仅当图标真实托管在 amazonaws.com 域名（而非路径/查询中包含该字符串）时才追加宽度参数
+  let isAmazonawsHost = false
+  try {
+    const hostname = new URL(post.pageIcon).hostname
+    isAmazonawsHost =
+      hostname === 'amazonaws.com' || hostname.endsWith('.amazonaws.com')
+  } catch {
+    isAmazonawsHost = false
+  }
+  pageIcon = isAmazonawsHost ? post.pageIcon + '&width=88' : post.pageIcon
   return (
     <SmartLink
       href={post?.href}

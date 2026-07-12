@@ -243,7 +243,20 @@ const LayoutSlug = props => {
             if (item.querySelector('figcaption').textContent.trim() === value) {
               item.classList.add('active')
               if (iframe) {
-                iframe.setAttribute('src', iframe.getAttribute('data-src'))
+                // 仅允许http/https协议的外链恢复播放，src使用解析后的规范化URL而非原始文本
+                const dataSrc = iframe.getAttribute('data-src')
+                let safeSrc = ''
+                try {
+                  const parsedUrl = new URL(dataSrc, window.location.href)
+                  if (parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:') {
+                    safeSrc = parsedUrl.href
+                  }
+                } catch {
+                  safeSrc = ''
+                }
+                if (safeSrc) {
+                  iframe.setAttribute('src', safeSrc)
+                }
               }
             } else {
               item.classList.remove('active')
