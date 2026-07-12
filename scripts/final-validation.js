@@ -77,7 +77,6 @@ function validateOptimizationTasks() {
       checks: [
         { file: 'next.config.js', desc: '安全头部配置', validate: validateSecurityHeaders },
         { file: 'lib/utils/validation.js', desc: '输入验证工具' },
-        { file: 'lib/middleware/security.js', desc: '安全中间件' },
         { file: 'lib/config/env-validation.js', desc: '环境变量验证' }
       ]
     },

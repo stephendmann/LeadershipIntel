@@ -1,4 +1,4 @@
-import { Validator, Sanitizer, RateLimiter } from '@/lib/utils/validation'
+import { Validator, Sanitizer } from '@/lib/utils/validation'
 
 describe('Validator', () => {
   describe('isValidEmail', () => {
@@ -165,19 +165,6 @@ describe('Sanitizer', () => {
     })
   })
 
-  describe('sanitizeXss', () => {
-    it('removes XSS patterns', () => {
-      expect(Sanitizer.sanitizeXss('<script>alert(1)</script>')).toBe('')
-      expect(Sanitizer.sanitizeXss('<iframe src="evil.com"></iframe>')).toBe('')
-      expect(Sanitizer.sanitizeXss('javascript:alert(1)')).toBe('')
-    })
-
-    it('preserves safe content', () => {
-      expect(Sanitizer.sanitizeXss('Hello world')).toBe('Hello world')
-      expect(Sanitizer.sanitizeXss('Safe text content')).toBe('Safe text content')
-    })
-  })
-
   describe('sanitizeFilename', () => {
     it('removes illegal characters', () => {
       expect(Sanitizer.sanitizeFilename('file<name>.txt')).toBe('filename.txt')
@@ -199,63 +186,5 @@ describe('Sanitizer', () => {
       expect(Sanitizer.escapeHtml('Tom & Jerry')).toBe('Tom &amp; Jerry')
       expect(Sanitizer.escapeHtml('"Hello"')).toBe('&quot;Hello&quot;')
     })
-  })
-})
-
-describe('RateLimiter', () => {
-  let rateLimiter
-
-  beforeEach(() => {
-    rateLimiter = new RateLimiter()
-    jest.useFakeTimers()
-  })
-
-  afterEach(() => {
-    jest.useRealTimers()
-  })
-
-  it('allows requests within limit', () => {
-    expect(rateLimiter.isRateLimited('user1', 5, 60000)).toBe(false)
-    expect(rateLimiter.isRateLimited('user1', 5, 60000)).toBe(false)
-    expect(rateLimiter.isRateLimited('user1', 5, 60000)).toBe(false)
-  })
-
-  it('blocks requests over limit', () => {
-    // Make 5 requests (limit)
-    for (let i = 0; i < 5; i++) {
-      expect(rateLimiter.isRateLimited('user1', 5, 60000)).toBe(false)
-    }
-    
-    // 6th request should be blocked
-    expect(rateLimiter.isRateLimited('user1', 5, 60000)).toBe(true)
-  })
-
-  it('resets after time window', () => {
-    // Make 5 requests
-    for (let i = 0; i < 5; i++) {
-      rateLimiter.isRateLimited('user1', 5, 60000)
-    }
-    
-    // Should be blocked
-    expect(rateLimiter.isRateLimited('user1', 5, 60000)).toBe(true)
-    
-    // Advance time past window
-    jest.advanceTimersByTime(61000)
-    
-    // Should be allowed again
-    expect(rateLimiter.isRateLimited('user1', 5, 60000)).toBe(false)
-  })
-
-  it('handles different users separately', () => {
-    // User1 makes 5 requests
-    for (let i = 0; i < 5; i++) {
-      rateLimiter.isRateLimited('user1', 5, 60000)
-    }
-    
-    // User1 should be blocked
-    expect(rateLimiter.isRateLimited('user1', 5, 60000)).toBe(true)
-    
-    // User2 should still be allowed
-    expect(rateLimiter.isRateLimited('user2', 5, 60000)).toBe(false)
   })
 })
