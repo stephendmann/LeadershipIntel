@@ -37,7 +37,22 @@ const Slug = props => {
   const { showNotification, Notification } = useNotification()
 
   /**
-   * 验证文章密码
+   * 解锁并记录本次解锁的SHA256摘要（不持久化明文密码）
+   * @param {*} digest
+   */
+  const unlockWithDigest = digest => {
+    setLock(false)
+    // 键仅含 pathname，避免 query/hash 导致读写不一致（PR #3389）
+    localStorage.setItem(
+      'password_' + getPasswordStoragePath(router.asPath),
+      digest
+    )
+    showNotification(locale.COMMON.ARTICLE_UNLOCK_TIPS) // 设置解锁成功提示显示
+  }
+
+  /**
+   * 验证用户刚输入/URL中带来的明文密码
+   * 兼容旧版 md5(slug+明文) 密码字段；成功后仅将SHA256摘要写入 localStorage
    * @param {*} passInput
    */
   const validPassword = passInput => {
@@ -47,13 +62,22 @@ const Slug = props => {
     const legacy = md5(String(post?.slug ?? '') + passInput)
     const nextHash = sha256Digest(passInput)
     if (nextHash === post?.password || legacy === post?.password) {
-      setLock(false)
-      // 输入密码存入 localStorage；键仅含 pathname，避免 query/hash 导致读写不一致（PR #3389）
-      localStorage.setItem(
-        'password_' + getPasswordStoragePath(router.asPath),
-        passInput
-      )
-      showNotification(locale.COMMON.ARTICLE_UNLOCK_TIPS) // 设置解锁成功提示显示
+      unlockWithDigest(nextHash)
+      return true
+    }
+    return false
+  }
+
+  /**
+   * 用 localStorage 中保存的SHA256摘要直接与post.password比较（无需明文）
+   * @param {*} digest
+   */
+  const validPasswordDigest = digest => {
+    if (!post) {
+      return false
+    }
+    if (digest === post?.password) {
+      unlockWithDigest(digest)
       return true
     }
     return false
@@ -68,16 +92,16 @@ const Slug = props => {
       setLock(false)
     }
 
-    // 读取上次记录 自动提交密码
-    const passInputs = getPasswordQuery(router.asPath)
-    if (passInputs.length > 0) {
-      for (const passInput of passInputs) {
-        if (validPassword(passInput)) {
+    // 读取上次记录 自动提交密码/摘要
+    const { rawPassword, storedDigests } = getPasswordQuery(router.asPath)
+    if (!(rawPassword && validPassword(rawPassword))) {
+      for (const digest of storedDigests) {
+        if (validPasswordDigest(digest)) {
           break // 密码验证成功，停止尝试
         }
       }
     }
-    // validPassword 内部依赖 post / router 同时也已在依赖里
+    // validPassword/validPasswordDigest 内部依赖 post / router 同时也已在依赖里
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [post, router.asPath])
 
