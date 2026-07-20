@@ -7,27 +7,27 @@
   resolved "https://registry.npmjs.org/@adobe/css-tools/-/css-tools-4.4.4.tgz"
   integrity sha512-Elp+iwUx5rN5+Y8xLt5/GRoG20WGoDCQ/1Fb+1LiGtvwbDavuSk0jhD/eZdckHAuzcDzccnkv+rEjyWfRx18gg==
 
-"@ai-sdk/gateway@4.0.16":
-  version "4.0.16"
-  resolved "https://registry.yarnpkg.com/@ai-sdk/gateway/-/gateway-4.0.16.tgz#7dd1f450fa5e2b0785b69842638b4df2445f9885"
-  integrity sha512-9iYxdOLquoOFk5e+02P9qfBIA+EJU0FNJvyjGxi4iXJabt2+GlbaCg7TX0sTtxOsBVkdabkatqWM6+kvp53tBg==
+"@ai-sdk/gateway@4.0.23":
+  version "4.0.23"
+  resolved "https://registry.yarnpkg.com/@ai-sdk/gateway/-/gateway-4.0.23.tgz#4177fcfdead4044576c50c9ef40fac37e1f95a85"
+  integrity sha512-f85diFdPMXYJpxCjOYZchMQkRH8h3r6lhK4Q2xmzJ7UA2OQ80L3W7tFu61742xGQK7zHWm5AhxYhNuc50H9SGQ==
   dependencies:
     "@ai-sdk/provider" "4.0.3"
-    "@ai-sdk/provider-utils" "5.0.7"
+    "@ai-sdk/provider-utils" "5.0.11"
     "@vercel/oidc" "3.2.0"
 
-"@ai-sdk/google@^4.0.12":
-  version "4.0.12"
-  resolved "https://registry.yarnpkg.com/@ai-sdk/google/-/google-4.0.12.tgz#9a45326ba8b0f999ccaa1af7b7a7aaef24e93e5a"
-  integrity sha512-4Rw4viFwH2Wprx6OssZzhV/KgNWaA7qYr5Kg28AlZ7r3sEvyXH0kDZtZok7onPjr0RuFTg2EjCjTIeoCesg0Ww==
+"@ai-sdk/google@^4.0.18":
+  version "4.0.18"
+  resolved "https://registry.yarnpkg.com/@ai-sdk/google/-/google-4.0.18.tgz#9c81b623b366abc91aa5708dce0be2c198f29c7c"
+  integrity sha512-NRbXRAasXLgFLiZDTsDUiTUuQtEUDVZoqruB5Px3geltTEqOzOo2eHN5WnDp0/OgxwnrNH4olV/TVetza0PzmQ==
   dependencies:
     "@ai-sdk/provider" "4.0.3"
-    "@ai-sdk/provider-utils" "5.0.7"
+    "@ai-sdk/provider-utils" "5.0.11"
 
-"@ai-sdk/provider-utils@5.0.7":
-  version "5.0.7"
-  resolved "https://registry.npmmirror.com/@ai-sdk/provider-utils/-/provider-utils-5.0.7.tgz#e1bb4c785bc8eaf34aa4c08255375bd64b0d18bb"
-  integrity sha512-OSm5/5kdrHa11WIOo5LYgDKnxYWp5aB/wx5EXRHi0jpUGduMDeB6oht9U6p+UNNWIP3F/EqPpV8d7vdP/iRnqg==
+"@ai-sdk/provider-utils@5.0.11":
+  version "5.0.11"
+  resolved "https://registry.yarnpkg.com/@ai-sdk/provider-utils/-/provider-utils-5.0.11.tgz#e084d9f46f9f2297baabc5f004b92c45e82d4eee"
+  integrity sha512-7/96wE+ZsKB35iS9ASyllrE4Ym/EolXEB7AkuJ5FI++fmS85BVTAs77890C+1Z2jwHfBKjBQSBmsliOsAh0iFQ==
   dependencies:
     "@ai-sdk/provider" "4.0.3"
     "@standard-schema/spec" "^1.1.0"
@@ -41,13 +41,13 @@
   dependencies:
     json-schema "^0.4.0"
 
-"@ai-sdk/vue@^4.0.22":
-  version "4.0.22"
-  resolved "https://registry.yarnpkg.com/@ai-sdk/vue/-/vue-4.0.22.tgz#70c591400f84ee5fa68060b0e693ba619ac8df84"
-  integrity sha512-dPLlvqfVnC9d/UzrHrEhzQhLnt54rBBADucawPjTAaLFvPVdeUc+DXpOya2XhRLI1IMqprXvwtZdqX2keKsU5w==
+"@ai-sdk/vue@^4.0.31":
+  version "4.0.31"
+  resolved "https://registry.yarnpkg.com/@ai-sdk/vue/-/vue-4.0.31.tgz#8972cfebadd41523a642038c4c0301048d1f49e5"
+  integrity sha512-QB+jAoN0sdqlMgwiI65L212HdDrA91MYR5tMCs5WWGqhIshumy1d7+ExMIXn7XYpRCgo4LpWXOl+cO295T0lpA==
   dependencies:
-    "@ai-sdk/provider-utils" "5.0.7"
-    ai "7.0.22"
+    "@ai-sdk/provider-utils" "5.0.11"
+    ai "7.0.31"
     swrv "^1.2.0"
 
 "@algolia/abtesting@1.18.1":
@@ -2790,14 +2790,14 @@ agent-base@^7.1.0, agent-base@^7.1.2:
   resolved "https://registry.npmmirror.com/agent-base/-/agent-base-7.1.4.tgz"
   integrity sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==
 
-ai@7.0.22, ai@^7.0.19:
-  version "7.0.22"
-  resolved "https://registry.yarnpkg.com/ai/-/ai-7.0.22.tgz#f4abdf5c56d5565c623ebbb2960ebcfe2931835b"
-  integrity sha512-iAXYwQtR18qN7GXwNmGVAQM4uSJOh2+nZ5RP9NtDXfH5d4tlYyYzAM133O3U+eVcyWrvNRzecN9yW58xpCdfMg==
+ai@7.0.31, ai@^7.0.19:
+  version "7.0.31"
+  resolved "https://registry.yarnpkg.com/ai/-/ai-7.0.31.tgz#d8e6b919fa1ed5e98310fe92626cdd9852ab8b48"
+  integrity sha512-pJfwKXjF5kw0rKRTePwYo60EfWb8wfzJAgf3ojln/YkOsVVKttzZAJVcRPsg37Z3a06ZdKkxX+DSrMAFlPm5Mw==
   dependencies:
-    "@ai-sdk/gateway" "4.0.16"
+    "@ai-sdk/gateway" "4.0.23"
     "@ai-sdk/provider" "4.0.3"
-    "@ai-sdk/provider-utils" "5.0.7"
+    "@ai-sdk/provider-utils" "5.0.11"
 
 ajv@^6.12.4:
   version "6.12.6"
@@ -3076,13 +3076,13 @@ asynckit@^0.4.0:
   resolved "https://registry.npmmirror.com/asynckit/-/asynckit-0.4.0.tgz"
   integrity sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==
 
-autoprefixer@^10.5.2:
-  version "10.5.2"
-  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.5.2.tgz#5d7dcaab1c294038fe51e0fa3738d28e559caac0"
-  integrity sha512-rD5t5DwOjJdmSORcTq64j8MawTC+tbQ+HHqjR4NDumamy/ambn1UJrlKL+KdwujWxMkFjPM3pPHOEA9tl4767Q==
+autoprefixer@^10.5.4:
+  version "10.5.4"
+  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.5.4.tgz#3b7dd848b4155514a95ad1f6ce598844bea09697"
+  integrity sha512-MaU0U/za7N3r6brxD4YB/l4NSrFzLPlANv6wEuQVaIPlD3L4W9rFcQPbL/EilY9BHhHvhfcz3gInDLrEtWT4EA==
   dependencies:
-    browserslist "^4.28.4"
-    caniuse-lite "^1.0.30001799"
+    browserslist "^4.28.6"
+    caniuse-lite "^1.0.30001806"
     fraction.js "^5.3.4"
     picocolors "^1.1.1"
     postcss-value-parser "^4.2.0"
@@ -3321,7 +3321,7 @@ braces@^3.0.3, braces@~3.0.2:
   dependencies:
     fill-range "^7.1.1"
 
-browserslist@^4.24.0, browserslist@^4.28.4:
+browserslist@^4.24.0, browserslist@^4.28.6:
   version "4.28.6"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.28.6.tgz#7cf83afcd69c55fde6fb2dcc5039ff0f4ba42610"
   integrity sha512-FQBYNK15VMslhLHpA7+n+n1GOlF1kId2xcCg7/j95f24AOF6VDYMNH4mFxF7KuaTdv627faazpOAjFzMrfJOUw==
@@ -3420,10 +3420,10 @@ can-use-dom@^0.1.0:
   resolved "https://registry.npmmirror.com/can-use-dom/-/can-use-dom-0.1.0.tgz"
   integrity sha512-ceOhN1DL7Y4O6M0j9ICgmTYziV89WMd96SvSl0REd8PMgrY0B/WBOPoed5S1KUmJqXgUXh8gzSe6E3ae27upsQ==
 
-caniuse-lite@^1.0.30001579, caniuse-lite@^1.0.30001799, caniuse-lite@^1.0.30001803:
-  version "1.0.30001805"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001805.tgz#78d5d5968a69b7ff81af87a96d7ddc7ea6670b1e"
-  integrity sha512-52noaS3DubycKSXaU30TwPGIp+POyQSUVa5jBEq3vkRkY0kjyb3LQgvhU6WGyCcyXqVLWO0Cw0Q6BSdD0kUfVA==
+caniuse-lite@^1.0.30001579, caniuse-lite@^1.0.30001803, caniuse-lite@^1.0.30001806:
+  version "1.0.30001806"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001806.tgz#1bc8e502b723fa393455dfbedd5ccec0c29bb74e"
+  integrity sha512-72Cuvd95zbSYPKq6Fhg8eDJRlzgWDf7/mtoZv6Qe/DYNCEBdNxoA3+rZAU2ZhGCpZlns3EssFavaZomckT5Uuw==
 
 canvas@^3.0.0-rc2:
   version "3.2.3"
@@ -7072,10 +7072,10 @@ mz@^2.7.0:
     object-assign "^4.0.1"
     thenify-all "^1.0.0"
 
-nanoid@^3.3.12, nanoid@^3.3.6:
-  version "3.3.12"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.12.tgz#ab3d912e217a6d0a514f00a72a16543a28982c05"
-  integrity sha512-ZB9RH/39qpq5Vu6Y+NmUaFhQR6pp+M2Xt76XBnEwDaGcVAqhlvxrl3B2bKS5D3NH3QR76v3aSrKaF/Kiy7lEtQ==
+nanoid@^3.3.16, nanoid@^3.3.6:
+  version "3.3.16"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.16.tgz#a04d8ec4b1f10009d2d533947aefe4293737816c"
+  integrity sha512-bzlKTyNJ7+LdGIIwy8ijFpIqEQIvafahV7eYykJ8Cvh42EdJeODoJ6gUJXpQJvej1BddH8OqTXZNE/KfbWAu8Q==
 
 napi-build-utils@^2.0.0:
   version "2.0.0"
@@ -7701,12 +7701,12 @@ postcss@8.4.31:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-postcss@^8.4.23, postcss@^8.4.43, postcss@^8.4.47, postcss@^8.5.14, postcss@^8.5.15, postcss@^8.5.17:
-  version "8.5.17"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.5.17.tgz#45f1f5fd542e2bc18ba8bbf92c85c3cd8485c285"
-  integrity sha512-J7EF+8X+CzRPaJPOv9Ck2wNWJvGnnl3PcNPAdGg6GTLjyVpyQ0yATMSXRFRV01BviT/9Gwuc3rjEyJbDJG9a4w==
+postcss@^8.4.23, postcss@^8.4.43, postcss@^8.4.47, postcss@^8.5.14, postcss@^8.5.15, postcss@^8.5.20:
+  version "8.5.20"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.5.20.tgz#316a139da79484ce55969fa7bb6f2f1abcc14060"
+  integrity sha512-lW616l85ucIQL+FocMmL7pQFPqBmwejrCMg+iPxyImlrANNJG9NHq/RkyCZopDhd8C3LA03PHRJDjkbGu8vvug==
   dependencies:
-    nanoid "^3.3.12"
+    nanoid "^3.3.16"
     picocolors "^1.1.1"
     source-map-js "^1.2.1"
 
@@ -9536,10 +9536,10 @@ vite@^5.4.14:
   optionalDependencies:
     fsevents "~2.3.3"
 
-vitepress-chat@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.npmmirror.com/vitepress-chat/-/vitepress-chat-0.0.3.tgz#2d24d4fd9bb7448ea2ab38d1911f38e37644af57"
-  integrity sha512-t1pF65rglvOfocKLW8+8gBxOnc/0S4lMiXodLsY0EZVbPnfVfQaeuEifmkz0CVZbGPowemK8nZAwt9wmFaUAnQ==
+vitepress-chat@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/vitepress-chat/-/vitepress-chat-0.0.4.tgz#d774afb570c06713751c75ba2306c15aee276545"
+  integrity sha512-uoFN339SucRroIYfJwy7N0QzfHReZI7eDJ5ARjuz/H6CMTEwanivfe8UWJCpZJ5eqjOXRT9R/eLK5GBEEeqqfg==
 
 vitepress@^1.6.3:
   version "1.6.4"
