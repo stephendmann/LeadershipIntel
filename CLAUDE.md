@@ -2,7 +2,7 @@
 
 ## Project purpose
 
-LeadershipIntel is Stephen Mann's personal publishing platform. It renders selected Notion content as a public leadership and management blog for stephendmann.com.
+LeadershipIntel is Stephen Mann's personal publishing platform. It renders selected Notion content as a public leadership and management blog at intelligence.stephendmann.com.
 
 Notion remains the authoring system. The long-term architecture is:
 
