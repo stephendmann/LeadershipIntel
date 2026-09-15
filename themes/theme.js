@@ -174,7 +174,7 @@ export const getThemeConfig = async themeQuery => {
 }
 
 /**
- * Statically analysable base-layout loaders, one literal import per bundled theme.
+ * Statically analysable base-layout loaders for the themes this site enables.
  *
  * next/dynamic can only preload a module for server rendering when the import
  * is literal, so its module id can be recorded in the build's loadable
@@ -185,113 +185,28 @@ export const getThemeConfig = async themeQuery => {
  * pages/_app.js, the whole page head and body were discarded. That shipped
  * HTTP 200 pages with no <title> and no content to crawlers.
  *
- * Declaring each loader separately is verbose, but it is the only form the
- * compiler can see. These stay code-split -- a theme chunk is still fetched
- * only when that theme renders -- and the server bundle already contained
- * every theme via the context module, so this does not grow it.
+ * So the imports below are literal. But this map lists only the themes the site
+ * actually serves, not every folder under themes/.
  *
- * Keep in sync with the themes/ directory; next.config.js scans the same
- * folder for publicRuntimeConfig.THEMES.
+ * The reason is that entries here are not lazy on the server. Next calls
+ * Loadable.preloadAll() during server rendering (next/dist/server/render.js),
+ * which loads every registered loadable regardless of which theme renders. An
+ * earlier revision of this file mapped all 25 bundled themes and asserted they
+ * "stay code-split"; that was wrong. themes/claude imports isomorphic-dompurify
+ * at module scope, and its jsdom dependency reaches html-encoding-sniffer --
+ * CommonJS requiring an ESM-only @exodus/bytes. Node 22 tolerates that locally;
+ * the Vercel lambda's bundled loader does not. Every cold render of every route
+ * threw ERR_REQUIRE_ESM and returned HTTP 500, while the site rendered theme
+ * "next" and never used claude at all.
+ *
+ * To enable another theme, add its literal import here as well as setting
+ * NEXT_PUBLIC_THEME. A theme requested but absent from this map falls back via
+ * getFallbackThemeName to BLOG.THEME and logs a warning; it does not blank the
+ * page. The theme folders themselves are left in place.
  */
 const THEME_BASE_LAYOUTS = {
-  claude: dynamic(
-    () => import('@/themes/claude').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  commerce: dynamic(
-    () => import('@/themes/commerce').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  endspace: dynamic(
-    () => import('@/themes/endspace').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  example: dynamic(
-    () => import('@/themes/example').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  fukasawa: dynamic(
-    () => import('@/themes/fukasawa').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  fuwari: dynamic(
-    () => import('@/themes/fuwari').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  game: dynamic(
-    () => import('@/themes/game').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  gitbook: dynamic(
-    () => import('@/themes/gitbook').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  heo: dynamic(
-    () => import('@/themes/heo').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  hexo: dynamic(
-    () => import('@/themes/hexo').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  landing: dynamic(
-    () => import('@/themes/landing').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  magzine: dynamic(
-    () => import('@/themes/magzine').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  matery: dynamic(
-    () => import('@/themes/matery').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  medium: dynamic(
-    () => import('@/themes/medium').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  movie: dynamic(
-    () => import('@/themes/movie').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  nav: dynamic(
-    () => import('@/themes/nav').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
   next: dynamic(
     () => import('@/themes/next').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  nobelium: dynamic(
-    () => import('@/themes/nobelium').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  photo: dynamic(
-    () => import('@/themes/photo').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  plog: dynamic(
-    () => import('@/themes/plog').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  proxio: dynamic(
-    () => import('@/themes/proxio').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  simple: dynamic(
-    () => import('@/themes/simple').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  starter: dynamic(
-    () => import('@/themes/starter').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  thoughtlite: dynamic(
-    () => import('@/themes/thoughtlite').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
-    { ssr: true }
-  ),
-  typography: dynamic(
-    () => import('@/themes/typography').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
     { ssr: true }
   ),
 }
