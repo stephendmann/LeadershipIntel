@@ -122,10 +122,10 @@ Contributing factors worth recording:
 
 | Item | Status |
 |------|--------|
-| Content-check workflow (in-repo detection) | PR #85 |
-| Retire `upstream-sync.yml`, document manual syncing | PR #86 |
-| External uptime monitor with a content assertion | Owner — outside this repo |
-| Make `Test` a required check | Done (repository setting) |
+| Content-check workflow (in-repo detection) | Done — #85. Verified running green on `main`: a dispatched run passed in 17s on 2026-09-15. |
+| Retire `upstream-sync.yml`, document manual syncing | Done — #86. Verified: the next push to `main` generated no run, the first in 135 not to. |
+| External uptime monitor with a content assertion | Owner — outside this repo. Still the only detector that survives GitHub Actions being unavailable. |
+| Make `Test` a required check | Reported done by the repository owner. Branch-protection rule contents are not readable via the API used here, so this is recorded as reported, not independently verified. |
 
 ---
 
