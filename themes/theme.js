@@ -174,6 +174,129 @@ export const getThemeConfig = async themeQuery => {
 }
 
 /**
+ * Statically analysable base-layout loaders, one literal import per bundled theme.
+ *
+ * next/dynamic can only preload a module for server rendering when the import
+ * is literal, so its module id can be recorded in the build's loadable
+ * manifest. A template-literal import -- dynamic(() => import(`@/themes/${x}`))
+ * -- produces a webpack context module with no single id, so nothing is
+ * preloaded: on a cold lambda the component renders null before the promise
+ * settles, and because the base layout wraps <SEO> and <Component> in
+ * pages/_app.js, the whole page head and body were discarded. That shipped
+ * HTTP 200 pages with no <title> and no content to crawlers.
+ *
+ * Declaring each loader separately is verbose, but it is the only form the
+ * compiler can see. These stay code-split -- a theme chunk is still fetched
+ * only when that theme renders -- and the server bundle already contained
+ * every theme via the context module, so this does not grow it.
+ *
+ * Keep in sync with the themes/ directory; next.config.js scans the same
+ * folder for publicRuntimeConfig.THEMES.
+ */
+const THEME_BASE_LAYOUTS = {
+  claude: dynamic(
+    () => import('@/themes/claude').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  commerce: dynamic(
+    () => import('@/themes/commerce').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  endspace: dynamic(
+    () => import('@/themes/endspace').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  example: dynamic(
+    () => import('@/themes/example').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  fukasawa: dynamic(
+    () => import('@/themes/fukasawa').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  fuwari: dynamic(
+    () => import('@/themes/fuwari').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  game: dynamic(
+    () => import('@/themes/game').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  gitbook: dynamic(
+    () => import('@/themes/gitbook').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  heo: dynamic(
+    () => import('@/themes/heo').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  hexo: dynamic(
+    () => import('@/themes/hexo').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  landing: dynamic(
+    () => import('@/themes/landing').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  magzine: dynamic(
+    () => import('@/themes/magzine').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  matery: dynamic(
+    () => import('@/themes/matery').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  medium: dynamic(
+    () => import('@/themes/medium').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  movie: dynamic(
+    () => import('@/themes/movie').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  nav: dynamic(
+    () => import('@/themes/nav').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  next: dynamic(
+    () => import('@/themes/next').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  nobelium: dynamic(
+    () => import('@/themes/nobelium').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  photo: dynamic(
+    () => import('@/themes/photo').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  plog: dynamic(
+    () => import('@/themes/plog').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  proxio: dynamic(
+    () => import('@/themes/proxio').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  simple: dynamic(
+    () => import('@/themes/simple').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  starter: dynamic(
+    () => import('@/themes/starter').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  thoughtlite: dynamic(
+    () => import('@/themes/thoughtlite').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+  typography: dynamic(
+    () => import('@/themes/typography').then(m => getThemeExport(m, 'LayoutBase') || EmptyBaseLayout),
+    { ssr: true }
+  ),
+}
+
+/**
  * 获取当前主题（query 主题优先，且做合法性校验）
  */
 const getCurrentTheme = (router, fallbackTheme) => {
@@ -194,11 +317,24 @@ export const getBaseLayoutByTheme = theme => {
   if (baseLayoutCache.has(normalizedTheme)) {
     return baseLayoutCache.get(normalizedTheme)
   }
-  const DynamicBaseLayout = dynamic(
-    () =>
-      resolveThemeLayout(normalizedTheme, 'LayoutBase', EmptyBaseLayout),
-    { ssr: true }
-  )
+
+  // Same fallback order as resolveThemeLayout: requested theme, then the
+  // configured default, then a pass-through that never drops its children.
+  let DynamicBaseLayout = THEME_BASE_LAYOUTS[normalizedTheme]
+  if (!DynamicBaseLayout) {
+    const fallback = getFallbackThemeName(normalizedTheme)
+    DynamicBaseLayout = fallback ? THEME_BASE_LAYOUTS[fallback] : undefined
+    if (DynamicBaseLayout) {
+      console.warn(
+        `[theme] "${normalizedTheme}" has no base layout, using fallback "${fallback}".`
+      )
+    }
+  }
+  if (!DynamicBaseLayout) {
+    console.warn(`[theme] "${normalizedTheme}" has no base layout, using empty layout.`)
+    DynamicBaseLayout = EmptyBaseLayout
+  }
+
   baseLayoutCache.set(normalizedTheme, DynamicBaseLayout)
   return DynamicBaseLayout
 }
