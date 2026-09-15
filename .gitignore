@@ -64,3 +64,6 @@ package-lock.json
 .perf/
 tsconfig.tsbuildinfo
 webpack-internal:/
+
+# Content check run artefact (uploaded by CI, never committed)
+content-check-result.json
