@@ -152,9 +152,10 @@ GitHub only shows a check as available once it has run at least once on the bran
 
 | Workflow | Trigger | Purpose |
 |----------|---------|---------|
-| `ci.yml` | PR / push to main | Lint + type-check (fast, no secrets needed) |
+| `ci.yml` | PR / push to main | Lint, type-check and the Jest suite (no secrets needed) |
 | `lighthouse.yml` | Vercel deployment_status | Lighthouse audit against live preview/prod URL |
 | `codeql-analysis.yml` | PR / push / weekly | Security vulnerability scanning |
+| `content-check.yml` | Hourly + manual | Fetches the public site and fails if a page renders empty (the Aug-Sep 2026 failure mode). Alerts on 2+ consecutive failures. |
 
 ---
 
