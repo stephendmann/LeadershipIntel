@@ -146,6 +146,14 @@ GitHub only shows a check as available once it has run at least once on the bran
 
 ---
 
+## Incident history
+
+| Date | Incident | Record |
+|------|----------|--------|
+| 2026-08-04 → 2026-09-15 | Blank pages served as HTTP 200 (GTM-only shells) for ~6 weeks; no alert fired | [`docs/incidents/2026-09-blank-pages.md`](docs/incidents/2026-09-blank-pages.md) |
+
+---
+
 ## Useful links
 
 | Resource | URL |
