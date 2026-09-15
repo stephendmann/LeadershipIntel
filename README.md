@@ -2,7 +2,7 @@
 
 A personal knowledge and publishing platform built on [NotionNext](https://github.com/tangly1024/NotionNext) — an open-source framework that renders a Notion database as a public blog, deployed via Vercel.
 
-**Live site:** [stephendmann.com](https://stephendmann.com)
+**Live site:** [intelligence.stephendmann.com](https://intelligence.stephendmann.com)
 **Author:** Stephen Mann — management consultant and leadership adviser based in Tauranga, New Zealand
 
 ---
@@ -13,10 +13,10 @@ A personal knowledge and publishing platform built on [NotionNext](https://githu
 Notion database (LeadershipIntelligence)
   → NotionNext (this GitHub fork)
     → Vercel (auto-deploy on commit)
-      → stephendmann.com
+      → intelligence.stephendmann.com
 ```
 
-Content is written and managed entirely in Notion. Vercel re-fetches content every ~60 seconds, so publishing a new post requires no code deployment — just set **Status = Published** in the Notion database.
+Content is written and managed entirely in Notion. Vercel re-fetches content every ~5 minutes (`NEXT_REVALIDATE_SECOND`, default 300), so publishing a new post requires no code deployment — just set **Status = Published** in the Notion database.
 
 ---
 
@@ -88,7 +88,7 @@ A special row with **Type = CONFIG** in the Notion database overrides both `blog
 1. Write a new page in the **LeadershipIntelligence** Notion database
 2. Set **Status = Draft** while writing
 3. Fill in: **Type** (`Post`), **Category**, **Tags**, **Summary**, **Slug**, **Cover**
-4. Set **Status = Published** → live within ~60 seconds
+4. Set **Status = Published** → live within ~5 minutes
 5. To unpublish: change Status to `Revoke` or `Invisible`
 
 ### Content Types

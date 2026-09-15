@@ -9,7 +9,7 @@
 
 ## How It Works
 
-NotionNext reads your Notion database via the Notion API and renders it as a static website using Next.js. Vercel re-fetches content every ~60 seconds (configurable), so you never need to redeploy just to publish new content.
+NotionNext reads your Notion database via the Notion API and renders it as a static website using Next.js. Vercel re-fetches content every ~5 minutes (`NEXT_REVALIDATE_SECOND`, default 300; configurable), so you never need to redeploy just to publish new content.
 
 - **Source:** Your Notion database (the one with `NOTION_PAGE_ID` set in Vercel)
 - **Engine:** Next.js + NotionNext framework (your GitHub fork)
@@ -292,7 +292,7 @@ Set `COMMENT_SYSTEM` to your chosen provider and add the required IDs in `conf/c
 1. Write in Notion → create a new page in LeadershipIntelligence database
 2. Set **Status = Draft** while writing
 3. Add: Category, Tags, Summary, Slug, Cover image
-4. Set **Status = Published** → live within ~60 seconds
+4. Set **Status = Published** → live within ~5 minutes
 5. To unpublish: change Status to `Revoke` or `Invisible`
 
 ---
@@ -352,7 +352,7 @@ Inline database with Number/Formula properties. Enable Calculate totals in the f
 
 ---
 
-Once finished, set **Status = Published**. The post will appear on [stephendmann.com](https://stephendmann.com) within ~60 seconds.
+Once finished, set **Status = Published**. The post will appear on [intelligence.stephendmann.com](https://intelligence.stephendmann.com) within ~5 minutes.
 
 ---
 
