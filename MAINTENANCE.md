@@ -70,14 +70,27 @@ fix upstream since the bug likely exists there too.
 
 **Step-by-step:**
 
-1. Go to **Actions → Upstream Sync (PR-based) → Run workflow**
-2. A branch `sync/upstream-YYYY-MM-DD` is created and a PR opened automatically
-3. Review the diff carefully using `UPSTREAM-NOTES.md` as a reference:
-   - Accept framework/bug-fix changes
-   - Keep LeadershipIntel values in all protected files
-4. Resolve any merge conflicts
-5. Check the Vercel preview looks correct
-6. Merge the PR
+1. Back up the site-specific files first: `blog.config.js`,
+   `themes/next/config.js`, `conf/ad.config.js`, `pages/_document.js`.
+2. Fetch upstream and create a sync branch off the latest `main`:
+   ```bash
+   git remote add upstream https://github.com/notionnext-org/NotionNext.git   # once
+   git fetch upstream main
+   git checkout main && git pull
+   git checkout -b sync/upstream-$(date +%Y-%m-%d)
+   git merge upstream/main          # expect conflicts; do not use --no-commit
+   ```
+3. Resolve conflicts with `UPSTREAM-NOTES.md` open — it lists every protected
+   file and every deliberate divergence, with what to keep and what to accept.
+4. Run `yarn install --frozen-lockfile`, `yarn lint`, `yarn type-check`, `yarn test:ci`.
+5. Push the branch and open a PR against `main`. **Never merge upstream directly
+   into `main`.**
+6. Confirm the Vercel preview renders real content, then merge.
+
+There is no sync workflow. The previous `upstream-sync.yml` was removed on
+2026-09-15: its YAML was invalid, so it never ran once in 133 attempts, and it
+also lacked a `git commit` step — even repaired it would have pushed an empty
+branch. See the PR that removed it for the full evidence.
 
 **Frequency:** run when you want upstream fixes, or if upstream has a security patch. No need to stay in sync weekly — monthly or quarterly is fine for a stable site.
 
@@ -139,10 +152,10 @@ GitHub only shows a check as available once it has run at least once on the bran
 
 | Workflow | Trigger | Purpose |
 |----------|---------|---------|
-| `ci.yml` | PR / push to main | Lint + type-check (fast, no secrets needed) |
+| `ci.yml` | PR / push to main | Lint, type-check and the Jest suite (no secrets needed) |
 | `lighthouse.yml` | Vercel deployment_status | Lighthouse audit against live preview/prod URL |
 | `codeql-analysis.yml` | PR / push / weekly | Security vulnerability scanning |
-| `upstream-sync.yml` | Manual (workflow_dispatch) | Creates a sync branch + PR from upstream |
+| `content-check.yml` | Hourly + manual | Fetches the public site and fails if a page renders empty (the Aug-Sep 2026 failure mode). Alerts on 2+ consecutive failures. |
 
 ---
 

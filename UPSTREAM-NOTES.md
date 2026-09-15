@@ -35,6 +35,7 @@ safe to accept; changes that touch the values listed below must be kept.
 
 | File | Why removed |
 |------|-------------|
+| `.github/workflows/sync.yaml` | Upstream's own sync automation. This fork syncs manually (see "Merge workflow" below). If a sync brings it back as a modify/delete conflict, keep it deleted. |
 | `.github/workflows/bump-version-on-main.yml` | Upstream's release automation — auto-bumps package.json and recreates a `chore/bump-package-version` branch on every push to main. The fork's version follows upstream via syncs; this is noise here. If a sync brings it back (modify/delete conflict), keep it deleted. |
 
 ---
@@ -43,7 +44,6 @@ safe to accept; changes that touch the values listed below must be kept.
 
 | File | Purpose |
 |------|---------|
-| `.github/workflows/upstream-sync.yml` | This controlled sync workflow |
 | `.github/workflows/lighthouse.yml` | Lighthouse CI via deployment_status |
 | `.github/dependabot.yml` | Dependabot version updates |
 | `.github/lighthouse-budget.json` | Lighthouse performance budgets |
@@ -53,11 +53,15 @@ safe to accept; changes that touch the values listed below must be kept.
 
 ## Merge workflow
 
-1. Run **Upstream Sync** workflow (Actions → Upstream Sync → Run workflow)
-2. A PR is opened against `main` with branch `sync/upstream-YYYY-MM-DD`
-3. Review the diff — accept framework/bug-fix changes, keep LeadershipIntel values in the protected files above
-4. Resolve any conflicts using the table above as a reference
-5. Confirm Vercel preview deployment passes, then merge
+Sync is manual; there is no workflow. Full steps live in `MAINTENANCE.md`
+("Upstream sync process") and `README.md` ("Keeping the Fork Updated").
+
+1. `git fetch upstream main`, branch off the latest `main`, `git merge upstream/main`
+2. Resolve conflicts using the protected-file table above and the divergence
+   notes below
+3. Run `yarn lint`, `yarn type-check`, `yarn test:ci`
+4. Open a PR against `main` — never merge upstream directly into `main`
+5. Confirm the Vercel preview renders real content, then merge
 
 ---
 

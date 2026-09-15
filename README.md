@@ -130,11 +130,25 @@ Categories are defined as properties in your Notion database. Add whatever categ
 
 ## Keeping the Fork Updated
 
-The repo includes an `Upstream Sync` GitHub Action that auto-syncs with the upstream [tangly1024/NotionNext](https://github.com/tangly1024/NotionNext) repo.
+Upstream is [notionnext-org/NotionNext](https://github.com/notionnext-org/NotionNext) (formerly tangly1024/NotionNext). Syncing is **manual and deliberate** — there is no auto-sync workflow. The fork carries intentional divergences (see `UPSTREAM-NOTES.md`), so an automated merge at this distance would produce an unreviewable PR rather than a useful one.
 
 > **Caution:** Before any upstream sync, back up: `blog.config.js`, `themes/next/config.js`, `conf/ad.config.js`, and `pages/_document.js` — these contain site-specific customisations that a sync may overwrite.
 
-To disable auto-sync: GitHub → Actions → `Upstream Sync` → Disable workflow.
+1. Back up the files named in the caution above.
+2. Fetch upstream and create a sync branch off the latest `main`:
+   ```bash
+   git remote add upstream https://github.com/notionnext-org/NotionNext.git   # once
+   git fetch upstream main
+   git checkout main && git pull
+   git checkout -b sync/upstream-$(date +%Y-%m-%d)
+   git merge upstream/main          # expect conflicts; do not use --no-commit
+   ```
+3. Resolve conflicts with `UPSTREAM-NOTES.md` open — it lists every protected
+   file and every deliberate divergence, with what to keep and what to accept.
+4. Run `yarn install --frozen-lockfile`, `yarn lint`, `yarn type-check`, `yarn test:ci`.
+5. Push the branch and open a PR against `main`. **Never merge upstream directly
+   into `main`.**
+6. Confirm the Vercel preview renders real content, then merge.
 
 ---
 
