@@ -26,7 +26,8 @@ const customJestConfig = {
   },
   
   // Test environment
-  testEnvironment: 'jest-environment-jsdom',
+  // jsdom plus Node's WHATWG fetch globals; see jest.environment.js
+  testEnvironment: '<rootDir>/jest.environment.js',
   
   // Test file patterns
   testMatch: [
@@ -113,4 +114,19 @@ const customJestConfig = {
 }
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
-module.exports = createJestConfig(customJestConfig)
+// next/jest prepends a blanket '/node_modules/' to transformIgnorePatterns, and the
+// patterns are OR'd, so narrowing it inside customJestConfig has no effect. Build the
+// config first, then replace the list.
+//
+// @clerk ships ESM-only runtime files (@clerk/backend/dist/runtime/browser/crypto.mjs)
+// that Jest cannot parse untransformed. Reached via lib/global.js -> @clerk/nextjs, it
+// stopped any suite importing lib/ or a theme component from loading at all. Only
+// @clerk is transformed; the rest of node_modules stays ignored.
+module.exports = async () => {
+  const config = await createJestConfig(customJestConfig)()
+  config.transformIgnorePatterns = [
+    '/node_modules/(?!@clerk/)',
+    '^.+\\.module\\.(css|sass|scss)$'
+  ]
+  return config
+}
