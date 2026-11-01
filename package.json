@@ -139,7 +139,7 @@
     "vitepress": "^1.6.3",
     "vitepress-chat": "^0.0.3",
     "webpack-bundle-analyzer": "^4.5.0",
-    "zod": "^4.4.3"
+    "zod": "^4.6.6"
   },
   "resolutions": {
     "axios": ">=0.21.1",
