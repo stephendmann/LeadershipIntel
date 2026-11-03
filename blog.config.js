@@ -18,7 +18,7 @@ const BLOG = {
     APPEARANCE_DARK_TIME: process.env.NEXT_PUBLIC_APPEARANCE_DARK_TIME || [18, 6],
 
     AUTHOR: process.env.NEXT_PUBLIC_AUTHOR || 'Stephen Mann',
-    BIO: process.env.NEXT_PUBLIC_BIO || 'Strategy advisor helping leaders make better decisions. Founder at stephendmann.com.',
+    BIO: process.env.NEXT_PUBLIC_BIO || 'Independent AI adviser based in the Bay of Plenty. Former chief executive and current board chair, with almost 20 years in health and community leadership in New Zealand and Australia.',
     LINK: process.env.NEXT_PUBLIC_LINK || 'https://stephendmann.com',
     DESCRIPTION: process.env.NEXT_PUBLIC_DESCRIPTION || '',
     AVATAR: process.env.NEXT_PUBLIC_AVATAR || 'https://pub-a5fcf3735dd541139bfe474777b8784d.r2.dev/IMG_0484.JPG',
