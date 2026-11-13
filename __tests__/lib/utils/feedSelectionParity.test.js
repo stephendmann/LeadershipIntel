@@ -37,7 +37,10 @@ const {
   DISTRACTORS,
   EDIT_ORDER,
   PUBLISH_ORDER,
-  urlFor
+  urlFor,
+  FROZEN_NOW,
+  freezeClock,
+  restoreClock
 } = require('@/test-fixtures/feedSelectionPosts')
 
 const SITE = 'https://intelligence.stephendmann.com'
@@ -123,7 +126,13 @@ const expectAllEqual = (got, expected) => {
 const ALL = [...DISTRACTORS, ...ELIGIBLE].reverse()
 
 describe('static and API feeds select the same items', () => {
+  beforeAll(() => freezeClock())
+  afterAll(() => restoreClock())
   afterEach(() => jest.restoreAllMocks())
+
+  it('runs against the frozen clock', () => {
+    expect(Date.now()).toBe(FROZEN_NOW.getTime())
+  })
 
   it('default LATEST_POST_COUNT (6) of 8 eligible: same URLs, edit order, all formats', async () => {
     const got = await buildBoth(ALL, 6)

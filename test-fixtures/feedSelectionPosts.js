@@ -50,3 +50,32 @@ const DISTRACTORS = [
 const urlFor = (link, n) => `${link}/article/post-${n}`
 
 module.exports = { ELIGIBLE, DISTRACTORS, EDIT_ORDER, PUBLISH_ORDER, urlFor }
+
+/**
+ * Scheduled-publish checks compare against Date.now(), so suites that use
+ * this fixture freeze the clock. FROZEN_NOW is after every eligible post's
+ * start_date, after the expired window, and before the 2099 post.
+ * Only Date is faked; real timers keep async work behaving normally.
+ */
+const FROZEN_NOW = new Date('2026-12-01T00:00:00Z')
+
+function freezeClock(now = FROZEN_NOW) {
+  jest.useFakeTimers({
+    now,
+    doNotFake: [
+      'hrtime', 'nextTick', 'performance', 'queueMicrotask',
+      'requestAnimationFrame', 'cancelAnimationFrame',
+      'requestIdleCallback', 'cancelIdleCallback',
+      'setImmediate', 'clearImmediate', 'setInterval', 'clearInterval',
+      'setTimeout', 'clearTimeout'
+    ]
+  })
+}
+
+function restoreClock() {
+  jest.useRealTimers()
+}
+
+module.exports.FROZEN_NOW = FROZEN_NOW
+module.exports.freezeClock = freezeClock
+module.exports.restoreClock = restoreClock

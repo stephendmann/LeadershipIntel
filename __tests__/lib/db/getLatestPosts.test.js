@@ -19,8 +19,14 @@ const { getLatestPosts } = require('@/lib/db/SiteDataApi')
 const {
   ELIGIBLE,
   DISTRACTORS,
-  EDIT_ORDER
+  EDIT_ORDER,
+  FROZEN_NOW,
+  freezeClock,
+  restoreClock
 } = require('@/test-fixtures/feedSelectionPosts')
+
+beforeAll(() => freezeClock())
+afterAll(() => restoreClock())
 
 const ids = posts => posts.map(p => p.id.replace('id-', ''))
 // Mixed order input, as Notion would return it.
@@ -57,6 +63,23 @@ describe('getLatestPosts', () => {
     expect(got).not.toContain('future')
     expect(got).not.toContain('expired')
     expect(got).toHaveLength(6)
+  })
+
+  it('runs against the frozen clock', () => {
+    expect(Date.now()).toBe(FROZEN_NOW.getTime())
+  })
+
+  it('applies the publish window relative to the current time', () => {
+    const edge = (n, start) => ({
+      ...ELIGIBLE[0],
+      id: `id-${n}`,
+      slug: `article/${n}`,
+      lastEditedDate: '2026-11-20T00:00:00.000Z',
+      date: { start_date: start, time_zone: 'UTC' }
+    })
+    const pages = [edge('starts-yesterday', '2026-11-30'), edge('starts-tomorrow', '2026-12-02')]
+    expect(ids(getLatestPosts({ allPages: pages, latestPostCount: 6, schedulePublish: true })))
+      .toEqual(['starts-yesterday'])
   })
 
   it('keeps scheduled posts when scheduled publishing is off (unchanged behaviour)', () => {
