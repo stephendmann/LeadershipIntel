@@ -59,6 +59,7 @@ async function apiAtom(link) {
   fetchGlobalAllData.mockResolvedValue({
     siteInfo: { title: 'LI', description: 'd', link },
     allPages: [{ ...post }],
+    latestPosts: [{ ...post }],
     NOTION_CONFIG: { SUB_PATH: '' }
   })
   let body

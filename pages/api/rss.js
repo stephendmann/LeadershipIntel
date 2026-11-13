@@ -38,21 +38,14 @@ async function generateRssContent() {
     : pageIds[0]
 
   const props = await fetchGlobalAllData({ from: 'rss-api', pageId: targetId, locale })
-  if (!props || !props.allPages) {
+  if (!props || !Array.isArray(props.latestPosts)) {
     return null
   }
 
-  const { siteInfo, allPages, NOTION_CONFIG } = props
-
-  // Filter published posts only
-  const latestPosts = allPages
-    .filter(p => p.type === 'Post' && p.status === 'Published')
-    .sort((a, b) => {
-      const dateA = new Date(a.publishDay || a.publishDate || 0)
-      const dateB = new Date(b.publishDay || b.publishDate || 0)
-      return dateB - dateA
-    })
-    .slice(0, 20)
+  // Same selection as the static feed (lib/utils/rss.js): latestPosts from
+  // fetchGlobalAllData — published Posts, scheduled-publish aware, newest
+  // edit first, limited to LATEST_POST_COUNT.
+  const { siteInfo, latestPosts, NOTION_CONFIG } = props
 
   if (latestPosts.length === 0) {
     return null
