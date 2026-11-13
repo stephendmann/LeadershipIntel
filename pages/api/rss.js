@@ -2,6 +2,7 @@ import BLOG from '@/blog.config'
 import { fetchGlobalAllData } from '@/lib/db/SiteDataApi'
 import { generateRss, shouldGenerateRssForLocale } from '@/lib/utils/rss'
 import { Feed } from 'feed'
+import { DEFAULT_SITE_DESCRIPTION } from '@/lib/site/siteDefaults'
 
 /**
  * In-memory RSS cache to avoid regenerating on every request.
@@ -57,7 +58,7 @@ async function generateRssContent() {
   }
 
   const TITLE = siteInfo?.title || BLOG.AUTHOR
-  const DESCRIPTION = siteInfo?.description || BLOG.BIO
+  const DESCRIPTION = siteInfo?.description || DEFAULT_SITE_DESCRIPTION
   const LINK = siteInfo?.link || BLOG.LINK
   const AUTHOR = NOTION_CONFIG?.AUTHOR || BLOG.AUTHOR
   const LANG = NOTION_CONFIG?.LANG || BLOG.LANG
