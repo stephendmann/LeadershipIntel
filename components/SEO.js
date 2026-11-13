@@ -183,6 +183,24 @@ const SEO = props => {
 
       <link rel='icon' href={BLOG_FAVICON} />
 
+      {/* RSS / Atom feed autodiscovery */}
+      {String(siteConfig('ENABLE_RSS', false, NOTION_CONFIG)) === 'true' && (
+        <>
+          <link
+            rel='alternate'
+            type='application/rss+xml'
+            title={siteConfig('TITLE')}
+            href={`${LINK}/rss/feed.xml`}
+          />
+          <link
+            rel='alternate'
+            type='application/atom+xml'
+            title={siteConfig('TITLE')}
+            href={`${LINK}/rss/atom.xml`}
+          />
+        </>
+      )}
+
       {COMMENT_WEBMENTION_ENABLE && (
         <>
           <link

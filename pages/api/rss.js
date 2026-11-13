@@ -66,7 +66,13 @@ async function generateRssContent() {
   const feed = new Feed({
     title: TITLE,
     description: DESCRIPTION,
+    id: LINK,
     link: LINK,
+    feedLinks: {
+      rss: `${LINK}/rss/feed.xml`,
+      atom: `${LINK}/rss/atom.xml`,
+      json: `${LINK}/rss/feed.json`
+    },
     language: LANG,
     favicon: `${LINK}/favicon.png`,
     copyright: `All rights reserved ${year}, ${AUTHOR}`,
