@@ -2,6 +2,7 @@ import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
 import { createSiteUrl, normalizeSiteUrl } from '@/lib/sitemap-utils'
 import { isHttpLink, loadExternalResource } from '@/lib/utils'
+import { buildFeedMeta, isRssEnabled } from '@/lib/utils/feedUrls'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
@@ -184,19 +185,19 @@ const SEO = props => {
       <link rel='icon' href={BLOG_FAVICON} />
 
       {/* RSS / Atom feed autodiscovery */}
-      {String(siteConfig('ENABLE_RSS', false, NOTION_CONFIG)) === 'true' && (
+      {isRssEnabled(siteConfig('ENABLE_RSS', false, NOTION_CONFIG)) && (
         <>
           <link
             rel='alternate'
             type='application/rss+xml'
             title={siteConfig('TITLE')}
-            href={`${LINK}/rss/feed.xml`}
+            href={buildFeedMeta(LINK).feedLinks.rss}
           />
           <link
             rel='alternate'
             type='application/atom+xml'
             title={siteConfig('TITLE')}
-            href={`${LINK}/rss/atom.xml`}
+            href={buildFeedMeta(LINK).feedLinks.atom}
           />
         </>
       )}
