@@ -3,6 +3,7 @@ import { fetchGlobalAllData } from '@/lib/db/SiteDataApi'
 import { generateRss, shouldGenerateRssForLocale } from '@/lib/utils/rss'
 import { Feed } from 'feed'
 import { DEFAULT_SITE_DESCRIPTION } from '@/lib/site/siteDefaults'
+import { buildFeedMeta } from '@/lib/utils/feedUrls'
 
 /**
  * In-memory RSS cache to avoid regenerating on every request.
@@ -59,15 +60,19 @@ async function generateRssContent() {
 
   const TITLE = siteInfo?.title || BLOG.AUTHOR
   const DESCRIPTION = siteInfo?.description || DEFAULT_SITE_DESCRIPTION
-  const LINK = siteInfo?.link || BLOG.LINK
   const AUTHOR = NOTION_CONFIG?.AUTHOR || BLOG.AUTHOR
   const LANG = NOTION_CONFIG?.LANG || BLOG.LANG
+  const SUB_PATH = NOTION_CONFIG?.SUB_PATH || BLOG.SUB_PATH
+  const feedMeta = buildFeedMeta(siteInfo?.link || BLOG.LINK, SUB_PATH)
+  const LINK = feedMeta.base
   const year = new Date().getFullYear()
 
   const feed = new Feed({
     title: TITLE,
     description: DESCRIPTION,
-    link: LINK,
+    id: feedMeta.id,
+    link: feedMeta.link,
+    feedLinks: feedMeta.feedLinks,
     language: LANG,
     favicon: `${LINK}/favicon.png`,
     copyright: `All rights reserved ${year}, ${AUTHOR}`,
